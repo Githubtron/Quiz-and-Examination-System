@@ -1,0 +1,25 @@
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.title { font-size: 1.75rem; font-weight: 800; }
+.sub { color: var(--text-muted); margin-top: 0.25rem; }
+
+.statsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+.chartsRow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+@media (max-width: 768px) { .chartsRow { grid-template-columns: 1fr; } }
+
+.chartCard { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+.chartTitle { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+
+.quickActions { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+.sectionTitle { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+.actionGrid { display: flex; gap: 1rem; flex-wrap: wrap; }
+.actionBtn {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: 0.75rem 1.25rem; border-radius: var(--radius-sm);
+  font-size: 0.9rem; font-weight: 600; color: var(--text);
+  transition: all var(--transition);
+}
+.actionBtn:hover { background: #ede9fe; border-color: var(--primary-light); color: var(--primary); }
+.actionIcon { font-size: 1.1rem; }

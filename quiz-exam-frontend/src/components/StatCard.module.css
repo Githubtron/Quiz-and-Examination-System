@@ -1,0 +1,30 @@
+.card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 1.25rem 1.5rem; box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 1rem;
+  border-left: 4px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+.primary { border-left-color: var(--primary); }
+.success { border-left-color: var(--success); }
+.warning { border-left-color: var(--warning); }
+.danger  { border-left-color: var(--danger); }
+.secondary { border-left-color: var(--secondary); }
+
+.iconWrap {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.primary .iconWrap { background: #ede9fe; color: var(--primary); }
+.success .iconWrap { background: #d1fae5; color: var(--success); }
+.warning .iconWrap { background: #fef3c7; color: var(--warning); }
+.danger  .iconWrap { background: #fee2e2; color: var(--danger); }
+.secondary .iconWrap { background: #cffafe; color: var(--secondary); }
+
+.body { flex: 1; }
+.label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+.value { font-size: 1.75rem; font-weight: 800; color: var(--text); line-height: 1.2; }
+.trend { font-size: 0.78rem; color: var(--success); margin-top: 2px; }

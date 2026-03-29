@@ -1,0 +1,29 @@
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.title { font-size: 1.75rem; font-weight: 800; }
+.sub { color: var(--text-muted); margin-top: 0.25rem; }
+.addBtn { background: var(--primary); color: #fff; border: none; padding: 0.65rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; transition: all var(--transition); }
+.addBtn:hover { background: var(--primary-dark); }
+.filters { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.filters select, .filters input { padding: 0.55rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.875rem; background: var(--surface); }
+.filters select:focus, .filters input:focus { outline: none; border-color: var(--primary); }
+.qGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+.qCard { background: var(--surface); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); border: 1px solid var(--border); }
+.qTop { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.subject { font-size: 0.75rem; color: var(--text-muted); background: var(--surface2); padding: 0.15rem 0.5rem; border-radius: 4px; }
+.qText { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.5; }
+.options { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.options li { font-size: 0.85rem; padding: 0.3rem 0.6rem; border-radius: 4px; color: var(--text-muted); }
+.correct { background: #d1fae5; color: #065f46; font-weight: 600; }
+.answer { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+.arDetail { font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.empty { grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem; }
+.form { display: flex; flex-direction: column; gap: 1rem; }
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label { font-size: 0.875rem; font-weight: 600; }
+.field input, .field select, .field textarea { padding: 0.65rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.9rem; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--primary); }
+.modalActions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem; }
+.cancelBtn { background: var(--surface2); border: 1px solid var(--border); padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; }
+.submitBtn { background: var(--primary); color: #fff; border: none; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; }

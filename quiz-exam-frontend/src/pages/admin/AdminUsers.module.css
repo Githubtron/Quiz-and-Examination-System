@@ -1,0 +1,31 @@
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.title { font-size: 1.75rem; font-weight: 800; }
+.sub { color: var(--text-muted); margin-top: 0.25rem; }
+.createBtn {
+  background: var(--primary); color: #fff; border: none;
+  padding: 0.65rem 1.25rem; border-radius: var(--radius-sm);
+  font-weight: 700; font-size: 0.9rem; transition: all var(--transition);
+}
+.createBtn:hover { background: var(--primary-dark); }
+.successMsg { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.875rem; }
+.toolbar { margin-bottom: 1rem; }
+.search {
+  padding: 0.6rem 1rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.9rem; width: 100%; max-width: 360px;
+}
+.search:focus { outline: none; border-color: var(--primary); }
+.tableWrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.table { width: 100%; border-collapse: collapse; }
+.table th { background: var(--surface2); padding: 0.85rem 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.table td { padding: 0.9rem 1rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
+.table tr:hover td { background: #fafafa; }
+.empty { padding: 2rem; text-align: center; color: var(--text-muted); }
+.form { display: flex; flex-direction: column; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label { font-size: 0.875rem; font-weight: 600; }
+.field input { padding: 0.65rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.95rem; }
+.field input:focus { outline: none; border-color: var(--primary); }
+.modalActions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem; }
+.cancelBtn { background: var(--surface2); border: 1px solid var(--border); padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; }
+.submitBtn { background: var(--primary); color: #fff; border: none; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; }

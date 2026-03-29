@@ -1,0 +1,98 @@
+.page { min-height: 100vh; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0e7490 100%);
+  color: #fff; padding: 5rem 2rem 4rem;
+  display: flex; align-items: center; justify-content: center; gap: 4rem;
+  flex-wrap: wrap; min-height: 90vh;
+}
+.heroContent { max-width: 560px; }
+.heroBadge {
+  display: inline-block; background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25); border-radius: 20px;
+  padding: 0.3rem 1rem; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.heroTitle {
+  font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.heroSub { font-size: 1.05rem; color: rgba(255,255,255,.8); line-height: 1.7; margin-bottom: 2rem; }
+.heroCta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.btnPrimary {
+  background: #fff; color: var(--primary-dark); font-weight: 700;
+  padding: 0.75rem 2rem; border-radius: var(--radius-sm); border: none;
+  font-size: 1rem; transition: all var(--transition);
+}
+.btnPrimary:hover { background: #e0e7ff; transform: translateY(-1px); }
+.btnOutline {
+  background: transparent; color: #fff; font-weight: 600;
+  padding: 0.75rem 2rem; border-radius: var(--radius-sm);
+  border: 2px solid rgba(255,255,255,.5); font-size: 1rem;
+  transition: all var(--transition);
+}
+.btnOutline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.demoHint { font-size: 0.82rem; color: rgba(255,255,255,.6); }
+.demoHint strong { color: rgba(255,255,255,.9); }
+
+/* Hero visual */
+.heroVisual { display: flex; flex-direction: column; gap: 1rem; }
+.card1, .card2 {
+  background: rgba(255,255,255,.1); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius);
+  padding: 1.25rem; min-width: 280px;
+}
+.cardHeader { font-weight: 700; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.qItem { font-size: 0.85rem; color: rgba(255,255,255,.85); margin-bottom: 0.5rem; }
+.optionRow { margin-bottom: 0.75rem; }
+.optionActive {
+  background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.4);
+  padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+}
+.timer { font-size: 0.8rem; color: #fbbf24; font-weight: 600; }
+.card2 { display: flex; align-items: center; gap: 1rem; }
+.scoreCircle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.scoreNum { font-size: 1.2rem; font-weight: 800; }
+.scoreLabel { font-size: 0.65rem; opacity: .8; }
+.scoreDetail { font-size: 0.9rem; font-weight: 600; }
+
+/* Features */
+.features { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; }
+.sectionTitle { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.sectionSub { color: var(--text-muted); margin-bottom: 3rem; }
+.featureGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+}
+.featureCard {
+  background: var(--surface); border-radius: var(--radius); padding: 2rem;
+  box-shadow: var(--shadow); text-align: left;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.featureCard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.featureIcon { font-size: 2rem; margin-bottom: 1rem; }
+.featureTitle { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+.featureDesc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+/* Roles */
+.roles {
+  background: linear-gradient(135deg, #f8fafc, #ede9fe);
+  padding: 4rem 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+}
+.roleCard {
+  background: var(--surface); border-radius: var(--radius); padding: 2rem;
+  box-shadow: var(--shadow); text-align: center; max-width: 280px; flex: 1;
+}
+.roleIcon { font-size: 2.5rem; margin-bottom: 1rem; }
+.roleCard h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.roleCard p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+/* Footer */
+.footer {
+  background: var(--text); color: rgba(255,255,255,.6);
+  text-align: center; padding: 1.5rem; font-size: 0.85rem;
+}

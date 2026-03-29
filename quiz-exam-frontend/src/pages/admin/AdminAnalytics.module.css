@@ -1,0 +1,9 @@
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+.title { font-size: 1.75rem; font-weight: 800; }
+.sub { color: var(--text-muted); margin-bottom: 2rem; }
+.statsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.chartsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.wide { grid-column: 1 / -1; }
+.chartCard { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+.chartTitle { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+@media (max-width: 768px) { .chartsGrid { grid-template-columns: 1fr; } }

@@ -1,0 +1,32 @@
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
+.title { font-size: 1.75rem; font-weight: 800; margin: 0; }
+.sub { color: var(--text-muted); margin-top: 0.25rem; font-size: 0.9rem; }
+.passText { color: var(--success); font-weight: 600; }
+.failText { color: var(--danger); font-weight: 600; }
+
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.refreshBtn { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 0.55rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+.refreshBtn:hover { border-color: var(--primary); color: var(--primary); }
+.exportBtn { background: var(--success); color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: opacity 0.2s; }
+.exportBtn:hover { opacity: .85; }
+.pdfBtn { background: var(--danger); color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: opacity 0.2s; }
+.pdfBtn:hover { opacity: .85; }
+
+.statsRow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.statCard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; box-shadow: var(--shadow); }
+.statLabel { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.statValue { font-size: 1.5rem; font-weight: 800; }
+
+.toolbar { margin-bottom: 1rem; }
+.search { padding: 0.6rem 1rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.9rem; width: 100%; max-width: 360px; }
+.search:focus { outline: none; border-color: var(--primary); }
+
+.tableWrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.table { width: 100%; border-collapse: collapse; }
+.table th { background: var(--surface2); padding: 0.85rem 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.table td { padding: 0.9rem 1rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
+.table tr:hover td { background: #fafafa; }
+.pctBar { display: flex; align-items: center; gap: 0.5rem; }
+.pctFill { height: 6px; border-radius: 3px; min-width: 4px; transition: width .3s; }
+.empty { padding: 2rem; text-align: center; color: var(--text-muted); }
