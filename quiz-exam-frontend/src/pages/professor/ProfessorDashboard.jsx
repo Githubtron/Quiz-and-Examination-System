@@ -50,6 +50,7 @@ export default function ProfessorDashboard() {
           <div className={styles.actionList}>
             {[
               { label: 'Create New Question', icon: '➕', path: '/professor/questions' },
+              { label: 'Generate from Document', icon: '✨', path: '/professor/generate' },
               { label: 'Create New Exam', icon: '📝', path: '/professor/exams' },
               { label: 'View Results', icon: '📊', path: '/professor/results' },
             ].map(a => (

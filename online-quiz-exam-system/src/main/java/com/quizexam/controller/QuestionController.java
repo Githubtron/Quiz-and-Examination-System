@@ -3,6 +3,9 @@ package com.quizexam.controller;
 import com.quizexam.model.*;
 import com.quizexam.repository.QuestionRepository;
 import com.quizexam.repository.UserRepository;
+import com.quizexam.service.AiQuestionGeneratorService;
+import com.quizexam.service.AiQuestionGeneratorService.GeneratedQuestion;
+import com.quizexam.service.DocumentTextExtractor;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -21,10 +25,15 @@ public class QuestionController {
 
     private final QuestionRepository questionRepository;
     private final UserRepository userRepository;
+    private final DocumentTextExtractor textExtractor;
+    private final AiQuestionGeneratorService aiService;
 
-    public QuestionController(QuestionRepository questionRepository, UserRepository userRepository) {
+    public QuestionController(QuestionRepository questionRepository, UserRepository userRepository,
+                               DocumentTextExtractor textExtractor, AiQuestionGeneratorService aiService) {
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
+        this.textExtractor = textExtractor;
+        this.aiService = aiService;
     }
 
     @GetMapping
@@ -101,6 +110,62 @@ public class QuestionController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * POST /api/questions/generate
+     * Upload a PDF or DOCX, extract text, call Gemini AI, return generated MCQs (not saved yet).
+     */
+    @PostMapping("/generate")
+    @PreAuthorize("hasAnyRole('PROFESSOR','ADMIN')")
+    public ResponseEntity<?> generateFromDocument(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "count", defaultValue = "5") int count) {
+        try {
+            if (count < 1 || count > 20) count = 5;
+            String text = textExtractor.extract(file);
+            List<GeneratedQuestion> questions = aiService.generate(text, count);
+            return ResponseEntity.ok(Map.of(
+                "filename", file.getOriginalFilename(),
+                "questions", questions
+            ));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(503).body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("error", "Failed to generate questions: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * POST /api/questions/save-generated
+     * Save a list of approved generated MCQs to the question bank.
+     */
+    @PostMapping("/save-generated")
+    @PreAuthorize("hasAnyRole('PROFESSOR','ADMIN')")
+    public ResponseEntity<?> saveGenerated(
+            @Valid @RequestBody SaveGeneratedRequest req,
+            @AuthenticationPrincipal UserDetails principal) {
+        long userId = userRepository.findByUsername(principal.getUsername()).orElseThrow().getId();
+        List<Question> saved = req.questions().stream().map(q -> {
+            MCQ mcq = new MCQ();
+            mcq.setText(q.text());
+            mcq.setDifficulty(parseDifficulty(q.difficulty()));
+            mcq.setSubject(q.subject());
+            mcq.setTopic(q.topic());
+            mcq.setCreatedBy(userId);
+            mcq.setOptionTexts(q.options());
+            mcq.setCorrectIndex(q.correctIndex());
+            mcq.setSourceDocument(req.sourceDocument());
+            return (Question) questionRepository.save(mcq);
+        }).toList();
+        return ResponseEntity.ok(Map.of("saved", saved.size(), "questions", saved));
+    }
+
+    private Difficulty parseDifficulty(String d) {
+        try { return Difficulty.valueOf(d.toUpperCase()); }
+        catch (Exception e) { return Difficulty.MEDIUM; }
+    }
+
     public record MCQRequest(
         @NotBlank String text, @NotNull List<String> options,
         int correctIndex, @NotBlank String difficulty,
@@ -116,5 +181,10 @@ public class QuestionController {
         @NotBlank String assertion, @NotBlank String reason,
         int correctChoice, @NotBlank String difficulty,
         String subject, String topic
+    ) {}
+
+    public record SaveGeneratedRequest(
+        @NotBlank String sourceDocument,
+        @NotNull List<GeneratedQuestion> questions
     ) {}
 }

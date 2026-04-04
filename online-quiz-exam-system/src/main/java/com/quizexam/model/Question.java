@@ -35,6 +35,9 @@ public abstract class Question {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "source_document", length = 255)
+    private String sourceDocument;
+
     @ManyToMany(mappedBy = "questions", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Exam> exams = new ArrayList<>();
@@ -69,4 +72,7 @@ public abstract class Question {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public String getSourceDocument() { return sourceDocument; }
+    public void setSourceDocument(String sourceDocument) { this.sourceDocument = sourceDocument; }
 }

@@ -16,6 +16,7 @@ import ProfessorDashboard from './pages/professor/ProfessorDashboard'
 import ProfessorQuestions from './pages/professor/ProfessorQuestions'
 import ProfessorExams from './pages/professor/ProfessorExams'
 import ProfessorResults from './pages/professor/ProfessorResults'
+import GenerateQuestions from './pages/professor/GenerateQuestions'
 
 import StudentDashboard from './pages/student/StudentDashboard'
 import StudentExams from './pages/student/StudentExams'
@@ -59,6 +60,7 @@ function AppRoutes() {
         <Route path="/professor/questions" element={<ProtectedRoute allowedRoles={['PROFESSOR']}><ProfessorQuestions /></ProtectedRoute>} />
         <Route path="/professor/exams" element={<ProtectedRoute allowedRoles={['PROFESSOR']}><ProfessorExams /></ProtectedRoute>} />
         <Route path="/professor/results" element={<ProtectedRoute allowedRoles={['PROFESSOR']}><ProfessorResults /></ProtectedRoute>} />
+        <Route path="/professor/generate" element={<ProtectedRoute allowedRoles={['PROFESSOR']}><GenerateQuestions /></ProtectedRoute>} />
 
         {/* Student */}
         <Route path="/student" element={<ProtectedRoute allowedRoles={['STUDENT']}><StudentDashboard /></ProtectedRoute>} />
