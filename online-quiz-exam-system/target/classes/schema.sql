@@ -11,14 +11,15 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS questions (
-    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
-    type        ENUM('MCQ','AR','TF') NOT NULL,
-    text        TEXT NOT NULL,
-    difficulty  ENUM('EASY','MEDIUM','HARD'),
-    subject     VARCHAR(100),
-    topic       VARCHAR(100),
-    created_by  BIGINT NOT NULL,
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    type             ENUM('MCQ','AR','TF') NOT NULL,
+    text             TEXT NOT NULL,
+    difficulty       ENUM('EASY','MEDIUM','HARD'),
+    subject          VARCHAR(100),
+    topic            VARCHAR(100),
+    created_by       BIGINT NOT NULL,
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    source_document  VARCHAR(255) DEFAULT NULL,
     CONSTRAINT fk_questions_user FOREIGN KEY (created_by) REFERENCES users(id)
 );
 

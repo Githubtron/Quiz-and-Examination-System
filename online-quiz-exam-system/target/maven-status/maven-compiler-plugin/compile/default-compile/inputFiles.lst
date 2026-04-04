@@ -1,3 +1,4 @@
+C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\config\KeyVaultSecretProvider.java
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\config\SecurityConfig.java
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\controller\AttemptController.java
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\controller\AuthController.java
@@ -40,3 +41,5 @@ C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\security\JwtAuthFilter.java
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\security\JwtUtils.java
 C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\security\UserDetailsServiceImpl.java
+C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\service\AiQuestionGeneratorService.java
+C:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\src\main\java\com\quizexam\service\DocumentTextExtractor.java
