@@ -1,25 +1,42 @@
 package com.quizexam.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "notifications")
 public class Notification {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "user_id", nullable = false)
     private long userId;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
-    private Long examId; // nullable
+
+    @Column(name = "exam_id")
+    private Long examId;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "is_read")
     private boolean read;
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) createdAt = LocalDateTime.now();
+    }
 
     public Notification() {}
 
-    public Notification(long id, long userId, String message, Long examId,
-                        LocalDateTime createdAt, boolean read) {
-        this.id = id;
+    public Notification(long userId, String message, Long examId) {
         this.userId = userId;
         this.message = message;
         this.examId = examId;
-        this.createdAt = createdAt;
-        this.read = read;
     }
 
     public long getId() { return id; }

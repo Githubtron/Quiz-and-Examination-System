@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { Lock, UserRound } from 'lucide-react'
 import styles from './AuthPage.module.css'
+
+const ROLE_PRESETS = {
+  ADMIN: { label: 'Admin', username: 'admin', password: 'admin123' },
+  PROFESSOR: { label: 'Professor', username: 'professor', password: 'prof123' },
+  STUDENT: { label: 'Student', username: 'student', password: 'student123' },
+}
 
 export default function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ username: '', password: '' })
+  const [selectedRole, setSelectedRole] = useState('STUDENT')
+  const [form, setForm] = useState({
+    username: ROLE_PRESETS.STUDENT.username,
+    password: ROLE_PRESETS.STUDENT.password,
+  })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -15,7 +26,7 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      const session = login(form.username, form.password)
+      const session = await login(form.username, form.password)
       if (session.role === 'ADMIN') navigate('/admin')
       else if (session.role === 'PROFESSOR') navigate('/professor')
       else navigate('/student')
@@ -26,7 +37,13 @@ export default function LoginPage() {
     }
   }
 
-  const fillDemo = (username, password) => setForm({ username, password })
+  const handleRoleSelect = role => {
+    setSelectedRole(role)
+    setForm({
+      username: ROLE_PRESETS[role].username,
+      password: ROLE_PRESETS[role].password,
+    })
+  }
 
   return (
     <div className={styles.page}>
@@ -37,38 +54,59 @@ export default function LoginPage() {
           <p className={styles.sub}>Sign in to your QuizMaster account</p>
         </div>
 
+        <div className={styles.roleToggle}>
+          {Object.entries(ROLE_PRESETS).map(([role, meta]) => (
+            <button
+              key={role}
+              type="button"
+              className={`${styles.roleBtn} ${selectedRole === role ? styles.roleBtnActive : ''}`}
+              onClick={() => handleRoleSelect(role)}
+            >
+              {meta.label}
+            </button>
+          ))}
+        </div>
+
         {error && <div className={styles.error} role="alert">{error}</div>}
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="username">Username</label>
-            <input
-              id="username" type="text" placeholder="Enter your username"
-              value={form.username} onChange={e => setForm(f => ({ ...f, username: e.target.value }))}
-              required autoFocus
-            />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}><UserRound size={16} /></span>
+              <input
+                id="username"
+                type="text"
+                placeholder=" "
+                value={form.username}
+                onChange={e => setForm(f => ({ ...f, username: e.target.value }))}
+                required
+                autoFocus
+              />
+              <label htmlFor="username">Username</label>
+            </div>
           </div>
+
           <div className={styles.field}>
-            <label htmlFor="password">Password</label>
-            <input
-              id="password" type="password" placeholder="Enter your password"
-              value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
-              required
-            />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}><Lock size={16} /></span>
+              <input
+                id="password"
+                type="password"
+                placeholder=" "
+                value={form.password}
+                onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+                required
+              />
+              <label htmlFor="password">Password</label>
+            </div>
           </div>
+
           <button type="submit" className={styles.submitBtn} disabled={loading}>
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 
-        <div className={styles.demos}>
-          <p className={styles.demoLabel}>Quick demo login:</p>
-          <div className={styles.demoRow}>
-            <button onClick={() => fillDemo('admin', 'admin123')} className={styles.demoBtn}>Admin</button>
-            <button onClick={() => fillDemo('professor', 'prof123')} className={styles.demoBtn}>Professor</button>
-            <button onClick={() => fillDemo('student', 'student123')} className={styles.demoBtn}>Student</button>
-          </div>
-        </div>
+        <p className={styles.demoLabel}>Tip: role toggle auto-fills demo credentials.</p>
 
         <p className={styles.switchLink}>
           Don't have an account? <Link to="/register">Create one</Link>

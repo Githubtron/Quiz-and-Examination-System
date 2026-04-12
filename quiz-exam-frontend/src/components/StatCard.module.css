@@ -1,11 +1,16 @@
 .card {
-  background: var(--surface); border-radius: var(--radius);
-  padding: 1.25rem 1.5rem; box-shadow: var(--shadow);
-  display: flex; align-items: center; gap: 1rem;
-  border-left: 4px solid transparent;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid transparent;
   transition: transform var(--transition), box-shadow var(--transition);
 }
-.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
 .primary { border-left-color: var(--primary); }
 .success { border-left-color: var(--success); }
@@ -14,17 +19,18 @@
 .secondary { border-left-color: var(--secondary); }
 
 .iconWrap {
-  width: 48px; height: 48px; border-radius: 12px;
+  width: 46px; height: 46px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  font-size: 1.08rem;
 }
-.primary .iconWrap { background: #ede9fe; color: var(--primary); }
-.success .iconWrap { background: #d1fae5; color: var(--success); }
-.warning .iconWrap { background: #fef3c7; color: var(--warning); }
-.danger  .iconWrap { background: #fee2e2; color: var(--danger); }
-.secondary .iconWrap { background: #cffafe; color: var(--secondary); }
+.primary .iconWrap { background: rgba(108,99,255,.2); color: #c4bfff; }
+.success .iconWrap { background: rgba(16,185,129,.18); color: #6ee7b7; }
+.warning .iconWrap { background: rgba(245,158,11,.2); color: #fcd34d; }
+.danger  .iconWrap { background: rgba(239,68,68,.16); color: #fca5a5; }
+.secondary .iconWrap { background: rgba(0,188,212,.16); color: #67e8f9; }
 
 .body { flex: 1; }
-.label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
-.value { font-size: 1.75rem; font-weight: 800; color: var(--text); line-height: 1.2; }
-.trend { font-size: 0.78rem; color: var(--success); margin-top: 2px; }
+.label { font-size: 0.74rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.value { font-size: 1.62rem; font-weight: 800; color: var(--text); line-height: 1.2; }
+.trend { font-size: 0.78rem; color: #6ee7b7; margin-top: 2px; }

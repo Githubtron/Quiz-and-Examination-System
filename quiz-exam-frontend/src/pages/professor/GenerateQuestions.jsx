@@ -1,76 +1,73 @@
-import { useState, useRef } from 'react'
-import { mockQuestions } from '../../api/mockData'
+import { useEffect, useState, useRef } from 'react'
 import styles from './GenerateQuestions.module.css'
+import { useAuth } from '../../context/AuthContext'
 
 const DIFFICULTIES = ['EASY', 'MEDIUM', 'HARD']
+const BASE = 'http://localhost:8080'
 
-// Simulates the backend call — replace with real fetch when backend is connected
-async function callGenerateAPI(file, count) {
-  // --- MOCK: remove this block and uncomment the fetch below when backend is ready ---
-  await new Promise(r => setTimeout(r, 1800)) // simulate network delay
-  const filename = file.name
-  return {
-    filename,
-    questions: [
-      { text: 'What is the primary purpose of encapsulation in OOP?', options: ['Code reuse', 'Data hiding', 'Polymorphism', 'Inheritance'], correctIndex: 1, difficulty: 'MEDIUM', subject: 'OOP', topic: 'Encapsulation' },
-      { text: 'Which keyword is used to inherit a class in Java?', options: ['implements', 'extends', 'inherits', 'super'], correctIndex: 1, difficulty: 'EASY', subject: 'Java', topic: 'Inheritance' },
-      { text: 'What does the "final" keyword do when applied to a class?', options: ['Makes it abstract', 'Prevents instantiation', 'Prevents subclassing', 'Makes all methods static'], correctIndex: 2, difficulty: 'MEDIUM', subject: 'Java', topic: 'Keywords' },
-      { text: 'Which design pattern ensures only one instance of a class exists?', options: ['Factory', 'Observer', 'Singleton', 'Decorator'], correctIndex: 2, difficulty: 'HARD', subject: 'Design Patterns', topic: 'Creational' },
-      { text: 'What is method overloading?', options: ['Same method name, different parameters', 'Same method name, same parameters', 'Overriding parent method', 'Using abstract methods'], correctIndex: 0, difficulty: 'EASY', subject: 'OOP', topic: 'Polymorphism' },
-    ].slice(0, count)
+async function callGenerateAPI(file, count, token) {
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('count', count)
+  const res = await fetch(`${BASE}/api/questions/generate`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  })
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({ error: res.statusText }))
+    throw new Error(e.error || 'Generation failed')
   }
-  // --- Real API call (uncomment when backend is running) ---
-  // const token = localStorage.getItem('token')
-  // const formData = new FormData()
-  // formData.append('file', file)
-  // formData.append('count', count)
-  // const res = await fetch('http://localhost:8080/api/questions/generate', {
-  //   method: 'POST',
-  //   headers: { Authorization: `Bearer ${token}` },
-  //   body: formData,
-  // })
-  // if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Generation failed') }
-  // return res.json()
+  return res.json()
 }
 
-async function callSaveAPI(sourceDocument, questions) {
-  // --- MOCK: remove this block and uncomment the fetch below when backend is ready ---
-  await new Promise(r => setTimeout(r, 800))
-  questions.forEach((q, i) => {
-    mockQuestions.push({
-      id: Date.now() + i,
-      type: 'MCQ',
-      text: q.text,
-      options: q.options,
-      correctIndex: q.correctIndex,
-      difficulty: q.difficulty,
-      subject: q.subject,
-      topic: q.topic,
-      sourceDocument,
-    })
+async function callSaveAPI(sourceDocument, categoryId, questions, token) {
+  const res = await fetch(`${BASE}/api/questions/save-generated`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ sourceDocument, categoryId, questions }),
   })
-  return { saved: questions.length }
-  // --- Real API call ---
-  // const token = localStorage.getItem('token')
-  // const res = await fetch('http://localhost:8080/api/questions/save-generated', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-  //   body: JSON.stringify({ sourceDocument, questions }),
-  // })
-  // if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Save failed') }
-  // return res.json()
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({ error: res.statusText }))
+    throw new Error(e.error || 'Save failed')
+  }
+  return res.json()
+}
+
+async function callCategoriesAPI(token) {
+  const res = await fetch(`${BASE}/api/categories`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({ error: res.statusText }))
+    throw new Error(e.error || 'Failed to load categories')
+  }
+  return res.json()
 }
 
 export default function GenerateQuestions() {
+  const { session } = useAuth()
   const [file, setFile] = useState(null)
   const [count, setCount] = useState(5)
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [categories, setCategories] = useState([])
+  const [categoryId, setCategoryId] = useState('')
   const [sourceDoc, setSourceDoc] = useState('')
   const [questions, setQuestions] = useState([]) // { ...q, approved: bool, editing: bool }
   const [savedCount, setSavedCount] = useState(null)
   const fileRef = useRef()
+
+  useEffect(() => {
+    callCategoriesAPI(session?.token)
+      .then(data => {
+        const list = data || []
+        setCategories(list)
+        if (list.length > 0) setCategoryId(String(list[0].id))
+      })
+      .catch(e => setError(e.message))
+  }, [session?.token])
 
   const handleFileChange = (e) => {
     const f = e.target.files[0]
@@ -90,7 +87,7 @@ export default function GenerateQuestions() {
     if (!file) { setError('Please select a file first.'); return }
     setLoading(true); setError(''); setQuestions([]); setSavedCount(null)
     try {
-      const result = await callGenerateAPI(file, count)
+      const result = await callGenerateAPI(file, count, session?.token)
       setSourceDoc(result.filename)
       setQuestions(result.questions.map(q => ({ ...q, approved: false, editing: false })))
     } catch (e) {
@@ -132,9 +129,15 @@ export default function GenerateQuestions() {
 
   const handleSaveAll = async () => {
     if (approvedQuestions.length === 0) { setError('Approve at least one question before saving.'); return }
+    if (!categoryId) { setError('Select a category before saving.'); return }
     setSaving(true); setError('')
     try {
-      const result = await callSaveAPI(sourceDoc, approvedQuestions.map(({ approved, editing, ...q }) => q))
+      const result = await callSaveAPI(
+        sourceDoc,
+        Number(categoryId),
+        approvedQuestions.map(({ approved, editing, ...q }) => q),
+        session?.token
+      )
       setSavedCount(result.saved)
       setQuestions(qs => qs.filter(q => !q.approved))
     } catch (e) {
@@ -186,7 +189,14 @@ export default function GenerateQuestions() {
           <label className={styles.countLabel}>
             Questions to generate:
             <select className={styles.countSelect} value={count} onChange={e => setCount(Number(e.target.value))}>
-              {[3, 5, 8, 10, 15, 20].map(n => <option key={n} value={n}>{n}</option>)}
+            {[3, 5, 8, 10, 15, 20, 30, 50].map(n => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </label>
+          <label className={styles.countLabel}>
+            Category:
+            <select className={styles.countSelect} value={categoryId} onChange={e => setCategoryId(e.target.value)}>
+              {categories.length === 0 && <option value="">No categories</option>}
+              {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </label>
           <button className={styles.generateBtn} onClick={handleGenerate} disabled={loading || !file}>

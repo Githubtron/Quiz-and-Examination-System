@@ -1,13 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
+import { auth as authApi } from '../api/api'
 
 const AuthContext = createContext(null)
-
-// Mock users for demo — replace with real API calls
-const MOCK_USERS = [
-  { id: 1, username: 'admin', password: 'admin123', role: 'ADMIN', email: 'admin@quizmaster.com' },
-  { id: 2, username: 'professor', password: 'prof123', role: 'PROFESSOR', email: 'prof@quizmaster.com' },
-  { id: 3, username: 'student', password: 'student123', role: 'STUDENT', email: 'student@quizmaster.com' },
-]
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(() => {
@@ -15,10 +9,10 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null
   })
 
-  const login = useCallback((username, password) => {
-    const user = MOCK_USERS.find(u => u.username === username && u.password === password)
-    if (!user) throw new Error('Invalid credentials')
-    const s = { userId: user.id, username: user.username, role: user.role, email: user.email, token: crypto.randomUUID() }
+  const login = useCallback(async (username, password) => {
+    const data = await authApi.login(username, password)
+    // data: { token, userId, username, role, email }
+    const s = { token: data.token, userId: data.userId, username: data.username, role: data.role, email: data.email }
     setSession(s)
     localStorage.setItem('qm_session', JSON.stringify(s))
     return s
@@ -29,10 +23,8 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('qm_session')
   }, [])
 
-  const register = useCallback((username, email, password, role) => {
-    if (!username || !email || !password) throw new Error('All fields are required')
-    if (password.length < 8) throw new Error('Password must be at least 8 characters')
-    return { username, email, role }
+  const register = useCallback(async (username, email, password, role) => {
+    return authApi.register(username, email, password, role)
   }, [])
 
   const updateProfile = useCallback((updates) => {

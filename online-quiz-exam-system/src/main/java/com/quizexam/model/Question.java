@@ -29,6 +29,9 @@ public abstract class Question {
     @Column(length = 100)
     private String topic;
 
+    @Column(columnDefinition = "TEXT")
+    private String explanation;
+
     @Column(name = "created_by")
     private long createdBy;
 
@@ -37,6 +40,10 @@ public abstract class Question {
 
     @Column(name = "source_document", length = 255)
     private String sourceDocument;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @ManyToMany(mappedBy = "questions", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -67,6 +74,9 @@ public abstract class Question {
     public String getTopic() { return topic; }
     public void setTopic(String topic) { this.topic = topic; }
 
+    public String getExplanation() { return explanation; }
+    public void setExplanation(String explanation) { this.explanation = explanation; }
+
     public long getCreatedBy() { return createdBy; }
     public void setCreatedBy(long createdBy) { this.createdBy = createdBy; }
 
@@ -75,4 +85,7 @@ public abstract class Question {
 
     public String getSourceDocument() { return sourceDocument; }
     public void setSourceDocument(String sourceDocument) { this.sourceDocument = sourceDocument; }
+
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category; }
 }

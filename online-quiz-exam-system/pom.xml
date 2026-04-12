@@ -88,20 +88,6 @@
             <version>5.2.5</version>
         </dependency>
 
-        <!-- Azure Key Vault Secret client -->
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-security-keyvault-secrets</artifactId>
-            <version>4.9.3</version>
-        </dependency>
-
-        <!-- Azure Identity (DefaultAzureCredential) -->
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-identity</artifactId>
-            <version>1.15.4</version>
-        </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

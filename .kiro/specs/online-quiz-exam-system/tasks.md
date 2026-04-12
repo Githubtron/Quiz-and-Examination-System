@@ -146,10 +146,10 @@ Incremental Java implementation following the 3-layer architecture (Presentation
     - **Property 8: Attempt blocked outside scheduling window**
     - **Validates: Requirements 4.2**
 
-- [ ] 9. Checkpoint — core backend complete
+- [x] 9. Checkpoint — core backend complete
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 10. Result service and export
+- [x] 10. Result service and export
   - [x] 10.1 Implement `ResultServiceImpl`
     - `getResultForStudent`: load Result by (student, exam), include detail_json
     - `getResultsForExam`: load all Results for exam with student info
@@ -162,7 +162,7 @@ Incremental Java implementation following the 3-layer architecture (Presentation
   - [ ]* 10.3 Write unit tests for `ResultServiceImpl`
     - Test: CSV header present, PDF file created and non-empty, filter by student returns only that student's results
 
-- [ ] 11. Analytics service and charts
+- [x] 11. Analytics service and charts
   - [x] 11.1 Implement `AnalyticsServiceImpl`
     - `getExamStats`: compute average (arithmetic mean), median, highest, lowest, pass percentage from all Results for exam
     - `getHardestQuestions`: count incorrect responses per question across all attempts, sort descending
@@ -176,13 +176,13 @@ Incremental Java implementation following the 3-layer architecture (Presentation
   - [ ]* 11.3 Write unit tests for `AnalyticsServiceImpl`
     - Test: average of known score set, hardest question identified correctly
 
-- [ ] 12. Notification service
+- [x] 12. Notification service
   - [x] 12.1 Implement `NotificationServiceImpl`
     - `notifyExamAvailable`: find all students, INSERT notification row per student
     - `notifyResultsPublished`: same pattern for result-published event
     - _Requirements: 4.3, 4.4_
 
-- [ ] 13. Adaptive exam service
+- [x] 13. Adaptive exam service
   - [x] 13.1 Implement `AdaptiveExamServiceImpl`
     - `selectNextQuestion`: filter question pool by difficulty (step-up on correct, step-down on incorrect), exclude already-answered questions, pick random from candidates; fallback to any unanswered if no difficulty match
     - Persist adaptive session data (question sequence) in `attempt_answers.display_order`
@@ -246,11 +246,11 @@ Incremental Java implementation following the 3-layer architecture (Presentation
   - [x] 19.1 Instantiate DataSource, all Repository impls, all Service impls
     - Pass dependencies via constructor injection (no DI framework)
     - _Requirements: 12.1, 12.2_
-  - [ ] 19.2 Launch Swing UI with role-based panel routing
+  - [x] 19.2 Launch Swing UI with role-based panel routing
     - After login, show Admin / Professor / Student dashboard based on `Session.role`
     - _Requirements: 1.2, 1.8_
 
-- [ ] 20. Final checkpoint — Ensure all tests pass
+- [x] 20. Final checkpoint — Ensure all tests pass
   - Ensure all unit tests, property tests, and integration tests pass. Ask the user if questions arise.
 
 ---

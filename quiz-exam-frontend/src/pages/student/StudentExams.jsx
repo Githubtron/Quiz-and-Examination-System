@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { mockExams } from '../../api/mockData'
+import { exams as examsApi } from '../../api/api'
 import Badge from '../../components/Badge'
 import styles from './StudentExams.module.css'
 
 export default function StudentExams() {
+  const [allExams, setAllExams] = useState([])
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('ALL')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  const exams = mockExams.filter(e => {
+  useEffect(() => {
+    examsApi.list()
+      .then(data => setAllExams(data || []))
+      .catch(e => setError(e.message))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const exams = allExams.filter(e => {
     if (filter !== 'ALL' && e.status !== filter) return false
     if (search && !e.title.toLowerCase().includes(search.toLowerCase())) return false
     return true
   })
+
+  if (loading) return <div className={styles.page}><p>Loading exams…</p></div>
 
   return (
     <div className={styles.page}>
@@ -22,6 +34,8 @@ export default function StudentExams() {
           <p className={styles.sub}>Browse and attempt exams assigned to you</p>
         </div>
       </div>
+
+      {error && <p style={{ color: 'var(--danger)', marginBottom: '1rem' }}>{error}</p>}
 
       <div className={styles.toolbar}>
         <input
@@ -42,9 +56,7 @@ export default function StudentExams() {
       </div>
 
       {exams.length === 0 ? (
-        <div className={styles.empty}>
-          <p>🔍 No exams found matching your criteria.</p>
-        </div>
+        <div className={styles.empty}><p>🔍 No exams found matching your criteria.</p></div>
       ) : (
         <div className={styles.grid}>
           {exams.map(exam => (
@@ -56,7 +68,7 @@ export default function StudentExams() {
               <h3 className={styles.examTitle}>{exam.title}</h3>
               <p className={styles.examDesc}>{exam.description}</p>
               <div className={styles.meta}>
-                <span>📋 {exam.totalQuestions} questions</span>
+                <span>📋 {exam.totalQuestions ?? '?'} questions</span>
                 <span>⭐ {exam.marksPerQuestion} marks each</span>
                 {exam.negativeMarking > 0 && <span>➖ -{exam.negativeMarking} negative</span>}
               </div>

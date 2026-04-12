@@ -14,7 +14,7 @@ public class MCQ extends Question {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "mcq_options", joinColumns = @JoinColumn(name = "question_id"))
     @OrderColumn(name = "option_index")
-    @Column(name = "option_text", nullable = false)
+    @Column(name = "option_text", nullable = false, columnDefinition = "TEXT")
     private List<String> optionTexts = new ArrayList<>();
 
     public MCQ() {}

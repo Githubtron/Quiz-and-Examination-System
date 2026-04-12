@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { Lock, Mail, UserRound } from 'lucide-react'
 import styles from './AuthPage.module.css'
 
 export default function RegisterPage() {
@@ -10,11 +11,11 @@ export default function RegisterPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setError('')
     try {
-      register(form.username, form.email, form.password, form.role)
+      await register(form.username, form.email, form.password, form.role)
       setSuccess(true)
       setTimeout(() => navigate('/login'), 1500)
     } catch (err) {
@@ -36,27 +37,60 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" placeholder="Choose a username"
-              value={form.username} onChange={e => setForm(f => ({ ...f, username: e.target.value }))} required />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}><UserRound size={16} /></span>
+              <input
+                id="username"
+                type="text"
+                placeholder=" "
+                value={form.username}
+                onChange={e => setForm(f => ({ ...f, username: e.target.value }))}
+                required
+              />
+              <label htmlFor="username">Username</label>
+            </div>
           </div>
+
           <div className={styles.field}>
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="your@email.com"
-              value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}><Mail size={16} /></span>
+              <input
+                id="email"
+                type="email"
+                placeholder=" "
+                value={form.email}
+                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                required
+              />
+              <label htmlFor="email">Email</label>
+            </div>
           </div>
+
           <div className={styles.field}>
-            <label htmlFor="password">Password <span className={styles.hint}>(min 8 chars)</span></label>
-            <input id="password" type="password" placeholder="Create a password"
-              value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} required />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}><Lock size={16} /></span>
+              <input
+                id="password"
+                type="password"
+                placeholder=" "
+                value={form.password}
+                onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+                required
+              />
+              <label htmlFor="password">Password <span className={styles.hint}>(min 8 chars)</span></label>
+            </div>
           </div>
+
           <div className={styles.field}>
-            <label htmlFor="role">Role</label>
-            <select id="role" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
-              <option value="STUDENT">Student</option>
-              <option value="PROFESSOR">Professor</option>
-            </select>
+            <div className={styles.inputWrap}>
+              <select id="role" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
+                <option value="STUDENT">Student</option>
+                <option value="PROFESSOR">Professor</option>
+              </select>
+              <label htmlFor="role">Role</label>
+            </div>
           </div>
+
           <button type="submit" className={styles.submitBtn}>Create Account</button>
         </form>
 

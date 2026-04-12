@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { users as usersApi } from '../api/api'
 import Badge from '../components/Badge'
 import styles from './ProfilePage.module.css'
 
@@ -36,22 +37,32 @@ export default function ProfilePage() {
 
   const initials = (form.fullName || session?.username || '?').slice(0, 2).toUpperCase()
 
-  const handleSave = () => {
-    updateProfile(form)
-    setEditing(false)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 3000)
+  const handleSave = async () => {
+    try {
+      const updates = { email: form.email }
+      await usersApi.updateMe(updates)
+      updateProfile(form)
+      setEditing(false)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 3000)
+    } catch (e) {
+      setPwError(e.message)
+    }
   }
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = async () => {
     setPwError('')
     if (!pwForm.current) return setPwError('Enter your current password')
     if (pwForm.next.length < 8) return setPwError('New password must be at least 8 characters')
     if (pwForm.next !== pwForm.confirm) return setPwError('Passwords do not match')
-    updateProfile({ passwordHint: '••••••••' })
-    setPwForm({ current: '', next: '', confirm: '' })
-    setPwSaved(true)
-    setTimeout(() => setPwSaved(false), 3000)
+    try {
+      await usersApi.updateMe({ password: pwForm.next })
+      setPwForm({ current: '', next: '', confirm: '' })
+      setPwSaved(true)
+      setTimeout(() => setPwSaved(false), 3000)
+    } catch (e) {
+      setPwError(e.message)
+    }
   }
 
   return (

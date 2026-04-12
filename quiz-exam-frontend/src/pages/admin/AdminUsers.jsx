@@ -1,38 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { users as usersApi } from '../../api/api'
 import Badge from '../../components/Badge'
 import Modal from '../../components/Modal'
 import styles from './AdminUsers.module.css'
 
-const MOCK_USERS = [
-  { id: 1, username: 'admin', email: 'admin@quizmaster.com', role: 'ADMIN', createdAt: '2026-01-01' },
-  { id: 2, username: 'professor', email: 'prof@quizmaster.com', role: 'PROFESSOR', createdAt: '2026-01-05' },
-  { id: 3, username: 'student', email: 'student@quizmaster.com', role: 'STUDENT', createdAt: '2026-01-10' },
-  { id: 4, username: 'alice', email: 'alice@example.com', role: 'STUDENT', createdAt: '2026-02-01' },
-  { id: 5, username: 'bob', email: 'bob@example.com', role: 'STUDENT', createdAt: '2026-02-15' },
-]
-
 const roleBadge = { ADMIN: 'danger', PROFESSOR: 'primary', STUDENT: 'success' }
 
 export default function AdminUsers() {
-  const [users, setUsers] = useState(MOCK_USERS)
+  const [users, setUsers] = useState([])
   const [search, setSearch] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [form, setForm] = useState({ username: '', email: '', password: '' })
   const [msg, setMsg] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    usersApi.list()
+      .then(data => setUsers(data || []))
+      .catch(e => setError(e.message))
+      .finally(() => setLoading(false))
+  }, [])
 
   const filtered = users.filter(u =>
     u.username.toLowerCase().includes(search.toLowerCase()) ||
     u.email.toLowerCase().includes(search.toLowerCase())
   )
 
-  const handleCreate = e => {
+  const handleCreate = async e => {
     e.preventDefault()
-    const newUser = { id: Date.now(), ...form, role: 'ADMIN', createdAt: new Date().toISOString().slice(0, 10) }
-    setUsers(u => [...u, newUser])
-    setMsg('Admin account created successfully.')
-    setShowModal(false)
-    setForm({ username: '', email: '', password: '' })
+    try {
+      const newUser = await usersApi.createAdmin(form)
+      setUsers(u => [...u, newUser])
+      setMsg('Admin account created successfully.')
+      setShowModal(false)
+      setForm({ username: '', email: '', password: '' })
+    } catch (err) {
+      setMsg(err.message)
+    }
   }
+
+  const handleDelete = async (id) => {
+    if (!confirm('Delete this user?')) return
+    try {
+      await usersApi.delete(id)
+      setUsers(u => u.filter(x => x.id !== id))
+      setMsg('User deleted.')
+    } catch (err) {
+      setMsg(err.message)
+    }
+  }
+
+  if (loading) return <div className={styles.page}><p>Loading users…</p></div>
 
   return (
     <div className={styles.page}>
@@ -45,26 +64,33 @@ export default function AdminUsers() {
       </div>
 
       {msg && <div className={styles.successMsg}>{msg}</div>}
+      {error && <p style={{ color: 'var(--danger)' }}>{error}</p>}
 
       <div className={styles.toolbar}>
-        <input
-          className={styles.search} placeholder="Search by username or email…"
-          value={search} onChange={e => setSearch(e.target.value)}
-        />
+        <input className={styles.search} placeholder="Search by username or email…"
+          value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
       <div className={styles.tableWrap}>
         <table className={styles.table}>
           <thead>
-            <tr><th>Username</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+            <tr><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th></th></tr>
           </thead>
           <tbody>
             {filtered.map(u => (
               <tr key={u.id}>
                 <td><strong>{u.username}</strong></td>
                 <td>{u.email}</td>
-                <td><Badge variant={roleBadge[u.role]}>{u.role}</Badge></td>
-                <td>{u.createdAt}</td>
+                <td><Badge variant={roleBadge[u.role] || 'default'}>{u.role}</Badge></td>
+                <td>{u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td>
+                <td>
+                  {u.role !== 'ADMIN' && (
+                    <button onClick={() => handleDelete(u.id)}
+                      style={{ color: 'var(--danger)', background: 'none', border: 'none', cursor: 'pointer' }}>
+                      Delete
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

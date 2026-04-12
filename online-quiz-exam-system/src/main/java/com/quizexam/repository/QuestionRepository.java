@@ -12,7 +12,11 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findByDifficulty(Difficulty difficulty);
     List<Question> findBySubjectAndDifficulty(String subject, Difficulty difficulty);
     List<Question> findByCreatedBy(long createdBy);
+    long countByCategoryId(long categoryId);
+    boolean existsByCategoryId(long categoryId);
 
     @Query("SELECT q FROM Question q JOIN q.exams e WHERE e.id = :examId")
     List<Question> findByExamId(@Param("examId") long examId);
+
+    List<Question> findByCategoryId(long categoryId);
 }

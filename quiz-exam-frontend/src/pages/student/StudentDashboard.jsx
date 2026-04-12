@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { mockExams, mockResults, mockNotifications } from '../../api/mockData'
+import { exams as examsApi, results as resultsApi, notifications as notifApi, analytics } from '../../api/api'
 import StatCard from '../../components/StatCard'
 import Badge from '../../components/Badge'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
@@ -9,15 +9,41 @@ import styles from './StudentDashboard.module.css'
 
 export default function StudentDashboard() {
   const { session } = useAuth()
+  const [activeExams, setActiveExams] = useState([])
+  const [myResults, setMyResults] = useState([])
+  const [notifs, setNotifs] = useState([])
+  const [trendData, setTrendData] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const availableExams = mockExams.filter(e => e.status === 'ACTIVE')
-  const myResults = mockResults.slice(0, 3)
-  const unread = mockNotifications.filter(n => !n.isRead)
+  useEffect(() => {
+    Promise.all([
+      examsApi.listActive(),
+      resultsApi.my(),
+      notifApi.list(),
+    ]).then(([exs, res, ns]) => {
+      setActiveExams(exs || [])
+      setMyResults(res || [])
+      setNotifs(ns || [])
+      // Build trend from student progress
+      if (session?.userId) {
+        analytics.studentProgress(session.userId)
+          .then(prog => setTrendData((prog || []).map((p, i) => ({ name: `Exam ${i + 1}`, score: p.percentage }))))
+          .catch(() => {})
+      }
+    }).catch(() => {}).finally(() => setLoading(false))
+  }, [session?.userId])
 
-  const trendData = myResults.map(r => ({ name: r.studentName, score: r.percentage }))
+  const unread = notifs.filter(n => !n.read)
   const avg = myResults.length
     ? (myResults.reduce((s, r) => s + r.percentage, 0) / myResults.length).toFixed(1)
     : 0
+
+  const handleMarkRead = async (id) => {
+    await notifApi.markRead(id)
+    setNotifs(ns => ns.map(n => n.id === id ? { ...n, read: true } : n))
+  }
+
+  if (loading) return <div className={styles.page}><p>Loading…</p></div>
 
   return (
     <div className={styles.page}>
@@ -30,14 +56,13 @@ export default function StudentDashboard() {
       </div>
 
       <div className={styles.stats}>
-        <StatCard icon="📝" label="Available Exams" value={availableExams.length} color="primary" />
+        <StatCard icon="📝" label="Available Exams" value={activeExams.length} color="primary" />
         <StatCard icon="✅" label="Completed" value={myResults.length} color="success" />
         <StatCard icon="📊" label="Avg Score" value={`${avg}%`} color="warning" />
         <StatCard icon="🔔" label="Notifications" value={unread.length} color="danger" />
       </div>
 
       <div className={styles.grid}>
-        {/* Performance trend */}
         <div className={styles.card}>
           <h3 className={styles.cardTitle}>Performance Trend</h3>
           {trendData.length > 0 ? (
@@ -46,7 +71,7 @@ export default function StudentDashboard() {
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
                 <Tooltip formatter={v => `${v}%`} />
-                <Line type="monotone" dataKey="score" stroke="#4f46e5" strokeWidth={2} dot={{ r: 4 }} />
+                <Line type="monotone" dataKey="score" stroke="#6c63ff" strokeWidth={2} dot={{ r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
           ) : (
@@ -54,16 +79,16 @@ export default function StudentDashboard() {
           )}
         </div>
 
-        {/* Notifications */}
         <div className={styles.card}>
           <h3 className={styles.cardTitle}>Notifications</h3>
-          {mockNotifications.length === 0 ? (
+          {notifs.length === 0 ? (
             <p className={styles.empty}>No notifications.</p>
           ) : (
             <ul className={styles.notifList}>
-              {mockNotifications.map(n => (
-                <li key={n.id} className={`${styles.notifItem} ${!n.isRead ? styles.unread : ''}`}>
-                  <span className={styles.notifDot}>{!n.isRead ? '🔵' : '⚪'}</span>
+              {notifs.map(n => (
+                <li key={n.id} className={`${styles.notifItem} ${!n.read ? styles.unread : ''}`}
+                  onClick={() => !n.read && handleMarkRead(n.id)} style={{ cursor: !n.read ? 'pointer' : 'default' }}>
+                  <span className={styles.notifDot}>{!n.read ? '🔵' : '⚪'}</span>
                   <div>
                     <p className={styles.notifMsg}>{n.message}</p>
                     <p className={styles.notifTime}>{n.createdAt}</p>
@@ -75,18 +100,17 @@ export default function StudentDashboard() {
         </div>
       </div>
 
-      {/* Upcoming exams */}
       <div className={styles.card}>
         <div className={styles.cardHeader}>
           <h3 className={styles.cardTitle}>Available Exams</h3>
           <Link to="/student/exams" className={styles.viewAll}>View all →</Link>
         </div>
         <div className={styles.examList}>
-          {availableExams.map(exam => (
+          {activeExams.slice(0, 5).map(exam => (
             <div key={exam.id} className={styles.examRow}>
               <div className={styles.examInfo}>
                 <p className={styles.examName}>{exam.title}</p>
-                <p className={styles.examMeta}>⏱ {exam.timeLimitMinutes} min &nbsp;|&nbsp; {exam.totalQuestions} questions</p>
+                <p className={styles.examMeta}>⏱ {exam.timeLimitMinutes} min &nbsp;|&nbsp; {exam.totalQuestions ?? '?'} questions</p>
               </div>
               <div className={styles.examActions}>
                 <Badge variant="success">ACTIVE</Badge>
@@ -94,10 +118,10 @@ export default function StudentDashboard() {
               </div>
             </div>
           ))}
+          {activeExams.length === 0 && <p className={styles.empty}>No active exams right now.</p>}
         </div>
       </div>
 
-      {/* Recent results */}
       <div className={styles.card}>
         <div className={styles.cardHeader}>
           <h3 className={styles.cardTitle}>Recent Results</h3>
@@ -107,13 +131,13 @@ export default function StudentDashboard() {
           <p className={styles.empty}>No results yet.</p>
         ) : (
           <table className={styles.table}>
-            <thead><tr><th>Exam</th><th>Score</th><th>Percentage</th><th>Status</th></tr></thead>
+            <thead><tr><th>Attempt</th><th>Score</th><th>Percentage</th><th>Status</th></tr></thead>
             <tbody>
-              {myResults.map(r => (
+              {myResults.slice(0, 5).map(r => (
                 <tr key={r.id}>
-                  <td>{r.studentName}</td>
+                  <td>Attempt #{r.attemptId}</td>
                   <td>{r.totalScore}/{r.maxScore}</td>
-                  <td>{r.percentage}%</td>
+                  <td>{r.percentage?.toFixed(1)}%</td>
                   <td><Badge variant={r.percentage >= 50 ? 'success' : 'danger'}>{r.percentage >= 50 ? 'PASS' : 'FAIL'}</Badge></td>
                 </tr>
               ))}

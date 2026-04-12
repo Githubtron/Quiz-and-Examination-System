@@ -1,15 +1,28 @@
-import { useState } from 'react'
-import { mockResults } from '../../api/mockData'
+import React, { useState, useEffect } from 'react'
+import { results as resultsApi, triggerDownload } from '../../api/api'
 import Badge from '../../components/Badge'
 import styles from './AdminResults.module.css'
 
 export default function AdminResults() {
+  const [results, setResults] = useState([])
   const [search, setSearch] = useState('')
-  const [results, setResults] = useState([...mockResults])
+  const [loading, setLoading] = useState(true)
+  const [msg, setMsg] = useState('')
+
+  const load = () => {
+    setLoading(true)
+    resultsApi.all()
+      .then(data => setResults(data || []))
+      .catch(e => setMsg(e.message))
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => { load() }, [])
 
   const filtered = results.filter(r =>
-    r.studentName.toLowerCase().includes(search.toLowerCase()) ||
-    (r.examTitle || '').toLowerCase().includes(search.toLowerCase())
+    !search ||
+    String(r.attemptId).includes(search) ||
+    String(r.id).includes(search)
   )
 
   const passCount = filtered.filter(r => r.percentage >= 50).length
@@ -19,63 +32,13 @@ export default function AdminResults() {
     : 0
 
   const handleExportCSV = () => {
-    const rows = [['Student', 'Exam', 'Score', 'Max', 'Percentage', 'Status', 'Submitted']]
-    filtered.forEach(r => rows.push([
-      r.studentName,
-      r.examTitle || '',
-      r.totalScore,
-      r.maxScore,
-      r.percentage + '%',
-      r.percentage >= 50 ? 'PASS' : 'FAIL',
-      new Date(r.submittedAt).toLocaleString()
-    ]))
+    const rows = [['ResultId', 'AttemptId', 'TotalScore', 'MaxScore', 'Percentage', 'Status']]
+    filtered.forEach(r => rows.push([r.id, r.attemptId, r.totalScore, r.maxScore, r.percentage?.toFixed(1) + '%', r.percentage >= 50 ? 'PASS' : 'FAIL']))
     const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n')
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a'); a.href = url; a.download = 'all-results.csv'; a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(new Blob([csv], { type: 'text/csv' }), 'all-results.csv')
   }
 
-  const handleDownloadPDF = () => {
-    const rows = filtered.map(r => `<tr>
-      <td>${r.studentName}</td><td>${r.examTitle || '-'}</td>
-      <td>${r.totalScore}</td><td>${r.maxScore}</td><td>${r.percentage}%</td>
-      <td class="${r.percentage >= 50 ? 'pass' : 'fail'}">${r.percentage >= 50 ? 'PASS' : 'FAIL'}</td>
-      <td>${new Date(r.submittedAt).toLocaleString()}</td>
-    </tr>`).join('')
-    const html = `<html><head><title>All Results</title><style>
-      body{font-family:Arial,sans-serif;padding:2rem;color:#0f172a}
-      h1{font-size:1.4rem;margin-bottom:.25rem}
-      .meta{color:#64748b;font-size:.85rem;margin-bottom:1.5rem}
-      .stats{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-      .stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.75rem 1.25rem}
-      .stat-label{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
-      .stat-value{font-size:1.4rem;font-weight:800;color:#0f172a}
-      .pass-v{color:#10b981}.fail-v{color:#ef4444}
-      table{width:100%;border-collapse:collapse;font-size:.85rem}
-      th{background:#4f46e5;color:#fff;padding:.6rem .75rem;text-align:left}
-      td{padding:.6rem .75rem;border-bottom:1px solid #e2e8f0}
-      tr:nth-child(even) td{background:#f8fafc}
-      .pass{color:#10b981;font-weight:700}.fail{color:#ef4444;font-weight:700}
-      .footer{margin-top:2rem;font-size:.75rem;color:#94a3b8;text-align:right}
-    </style></head><body>
-    <h1>All Results Report</h1>
-    <p class="meta">Generated: ${new Date().toLocaleString()}</p>
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Total</div><div class="stat-value">${filtered.length}</div></div>
-      <div class="stat"><div class="stat-label">Avg Score</div><div class="stat-value">${avg}%</div></div>
-      <div class="stat"><div class="stat-label">Passed</div><div class="stat-value pass-v">${passCount}</div></div>
-      <div class="stat"><div class="stat-label">Failed</div><div class="stat-value fail-v">${failCount}</div></div>
-    </div>
-    <table><thead><tr><th>Student</th><th>Exam</th><th>Score</th><th>Max</th><th>%</th><th>Status</th><th>Submitted</th></tr></thead>
-    <tbody>${rows}</tbody></table>
-    <div class="footer">QuizMaster — Online Exam System</div>
-    </body></html>`
-    const win = window.open('', '_blank')
-    win.document.write(html)
-    win.document.close()
-    win.focus(); win.print(); win.close()
-  }
+  if (loading) return <div className={styles.page}><p>Loading results…</p></div>
 
   return (
     <div className={styles.page}>
@@ -89,11 +52,12 @@ export default function AdminResults() {
           </p>
         </div>
         <div className={styles.actions}>
-          <button className={styles.refreshBtn} onClick={() => setResults([...mockResults])}>↻ Refresh</button>
+          <button className={styles.refreshBtn} onClick={load}>↻ Refresh</button>
           <button className={styles.exportBtn} onClick={handleExportCSV}>⬇ Export CSV</button>
-          <button className={styles.pdfBtn} onClick={handleDownloadPDF}>🖨 Download PDF</button>
         </div>
       </div>
+
+      {msg && <div className={styles.msg} onClick={() => setMsg('')}>{msg}</div>}
 
       <div className={styles.statsRow}>
         {[
@@ -111,32 +75,31 @@ export default function AdminResults() {
       </div>
 
       <div className={styles.toolbar}>
-        <input className={styles.search} placeholder="Search by student or exam…"
+        <input className={styles.search} placeholder="Search by result or attempt ID…"
           value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
       <div className={styles.tableWrap}>
         <table className={styles.table}>
           <thead>
-            <tr><th>Student</th><th>Exam</th><th>Score</th><th>Max</th><th>Percentage</th><th>Status</th><th>Submitted</th></tr>
+            <tr><th>Result ID</th><th>Attempt ID</th><th>Score</th><th>Max</th><th>Percentage</th><th>Status</th></tr>
           </thead>
           <tbody>
             {filtered.length === 0
-              ? <tr><td colSpan={7} className={styles.empty}>No results found.</td></tr>
+              ? <tr><td colSpan={6} className={styles.empty}>No results found.</td></tr>
               : filtered.map(r => (
                 <tr key={r.id}>
-                  <td><strong>{r.studentName}</strong></td>
-                  <td>{r.examTitle || '—'}</td>
+                  <td>#{r.id}</td>
+                  <td>#{r.attemptId}</td>
                   <td>{r.totalScore}</td>
                   <td>{r.maxScore}</td>
                   <td>
                     <div className={styles.pctBar}>
                       <div className={styles.pctFill} style={{ width: `${r.percentage}%`, background: r.percentage >= 50 ? 'var(--success)' : 'var(--danger)' }} />
-                      <span>{r.percentage}%</span>
+                      <span>{r.percentage?.toFixed(1)}%</span>
                     </div>
                   </td>
                   <td><Badge variant={r.percentage >= 50 ? 'success' : 'danger'}>{r.percentage >= 50 ? 'PASS' : 'FAIL'}</Badge></td>
-                  <td>{new Date(r.submittedAt).toLocaleString()}</td>
                 </tr>
               ))
             }
