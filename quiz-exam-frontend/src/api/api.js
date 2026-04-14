@@ -31,14 +31,15 @@ async function request(method, path, body) {
 
 async function multipartRequest(method, path, formData) {
   const token = getToken()
-  const headers = { 'Content-Type': 'multipart/form-data' }
-  if (token) headers['Authorization'] = `Bearer ${token}`
   try {
     const response = await axios({
       method,
       url: `${BASE}${path}`,
       data: formData,
-      headers,
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        // Do NOT set Content-Type for FormData - browser auto-sets it with boundary
+      },
     })
     return response.data
   } catch (error) {

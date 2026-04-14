@@ -142,7 +142,10 @@ public class AiQuestionGeneratorService {
                "  proper questions around those concepts\n" +
                "- Options must be meaningful and plausible, not random text\n" +
                "- Only ONE option should be clearly correct\n" +
-               "- Wrong options should be related but clearly incorrect\n\n" +
+               "- Wrong options should be related but clearly incorrect\n" +
+               "- Each option must be SHORT — maximum 15 words only\n" +
+               "- NEVER paste raw document text or syllabus content as an option\n" +
+               "- NEVER use long sentences copied from the document as options\n\n" +
                "QUESTION FORMAT VARIETY (rotate between these):\n" +
                "1. Definition: 'What is [concept]?'\n" +
                "2. Purpose: 'What is the purpose of [concept]?'\n" +
@@ -221,6 +224,10 @@ public class AiQuestionGeneratorService {
             if (options.size() < 4) continue;
             options = new ArrayList<>(options.subList(0, 4));
 
+            // Reject questions where any option is too long (raw PDF dump detected)
+            boolean hasLongOption = options.stream().anyMatch(o -> o.length() > 120);
+            if (hasLongOption) continue;
+
             int correctIndex = parseCorrectIndex(node, options);
             String difficulty = "MIXED".equals(requestedDifficulty)
                 ? normalizeDifficulty(readText(node, "difficulty"))
@@ -258,8 +265,8 @@ public class AiQuestionGeneratorService {
         Random random = new Random(text.hashCode());
 
         for (int i = 0; i < count; i++) {
-            String correct = facts.get(i % facts.size());
-            String alternate = facts.get((i + 1) % facts.size());
+            String correct = truncate(facts.get(i % facts.size()), 80);
+            String alternate = truncate(facts.get((i + 1) % facts.size()), 80);
             int formatIndex = i % 8;
             List<String> options = new ArrayList<>();
 
@@ -269,7 +276,7 @@ public class AiQuestionGeneratorService {
                 options.add(correct);
                 options.add(alternate);
                 for (int j = 2; j < facts.size() && options.size() < 4; j++) {
-                    String distractor = facts.get((i + j) % facts.size());
+                    String distractor = truncate(facts.get((i + j) % facts.size()), 80);
                     if (!distractor.equals(correct) && !distractor.equals(alternate)) options.add(distractor);
                 }
                 while (options.size() < 4) {
@@ -278,7 +285,7 @@ public class AiQuestionGeneratorService {
             } else {
                 options.add(correct);
                 for (int j = 1; j < facts.size() && options.size() < 4; j++) {
-                    String distractor = facts.get((i + j) % facts.size());
+                    String distractor = truncate(facts.get((i + j) % facts.size()), 80);
                     if (!distractor.equals(correct)) options.add(distractor);
                 }
                 while (options.size() < 4) {
@@ -383,6 +390,12 @@ public class AiQuestionGeneratorService {
             if (keywords.size() == 2) break;
         }
         return keywords.isEmpty() ? "Operating System" : String.join(" ", keywords);
+    }
+
+    private String truncate(String text, int maxLen) {
+        if (text == null) return "";
+        text = text.trim();
+        return text.length() <= maxLen ? text : text.substring(0, maxLen).trim() + "...";
     }
 
     private String toTitleCase(String text) {
