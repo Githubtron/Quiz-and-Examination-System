@@ -1,0 +1,255 @@
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.4rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.addBtn {
+  border: 0;
+  color: #fff;
+  padding: 0.62rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.addBtn:disabled {
+  opacity: 0.55;
+}
+
+.warn,
+.msg {
+  border-radius: 10px;
+  padding: 0.72rem 0.88rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.86rem;
+}
+
+.warn {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+.msg {
+  background: rgba(16, 185, 129, 0.14);
+  color: #86efac;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.filters select,
+.filters input {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text);
+  height: 44px;
+}
+
+.qGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.qCard {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.qCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.qTop {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.categoryTag {
+  font-size: 0.72rem;
+  color: #c4bfff;
+  background: rgba(108, 99, 255, 0.16);
+  border: 1px solid rgba(108, 99, 255, 0.4);
+  padding: 0.16rem 0.45rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.subject {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  padding: 0.16rem 0.45rem;
+  border-radius: 999px;
+}
+
+.deleteBtn {
+  margin-left: auto;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.16);
+}
+
+.qText {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+  line-height: 1.5;
+}
+
+.options {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.options li {
+  font-size: 0.82rem;
+  padding: 0.34rem 0.55rem;
+  border-radius: 7px;
+  color: var(--text-muted);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.correct {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  color: #86efac !important;
+  font-weight: 700;
+}
+
+.answer {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.arDetail {
+  font-size: 0.84rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+.field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+  font-size: 0.88rem;
+  resize: vertical;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.65rem;
+  justify-content: flex-end;
+  margin-top: 0.35rem;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.6);
+  color: #c4bfff;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.submitBtn {
+  border: none;
+  color: #fff;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 1.1rem 0.9rem 1.3rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}

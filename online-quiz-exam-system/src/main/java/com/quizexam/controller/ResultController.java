@@ -161,4 +161,62 @@ public class ResultController {
                 .body(baos.toByteArray());
         }
     }
+
+    /**
+     * GET /api/results/{id}/export/pdf
+     * Export a single result as PDF.
+     */
+    @GetMapping("/{id}/export/pdf")
+    public ResponseEntity<byte[]> exportSinglePdf(@PathVariable long id, @AuthenticationPrincipal UserDetails principal) throws Exception {
+        Result result = resultRepository.findById(id).orElseThrow();
+        Attempt attempt = attemptRepository.findById(result.getAttemptId()).orElse(null);
+        long studentId = attempt != null ? attempt.getStudentId() : 0;
+        User user = userRepository.findByUsername(principal.getUsername()).orElseThrow();
+        
+        if (user.getRole() == com.quizexam.model.Role.STUDENT && user.getId() != studentId) {
+            return ResponseEntity.status(403).build();
+        }
+
+        try (PDDocument doc = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            doc.addPage(page);
+
+            PDType1Font boldFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
+            PDType1Font regularFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+
+            try (PDPageContentStream cs = new PDPageContentStream(doc, page)) {
+                float margin = 50;
+                float y = page.getMediaBox().getHeight() - margin;
+                float rowHeight = 20;
+
+                cs.beginText();
+                cs.setFont(boldFont, 16);
+                cs.newLineAtOffset(margin, y);
+                cs.showText("QuizMaster Result Report");
+                cs.endText();
+                y -= 40;
+
+                cs.beginText();
+                cs.setFont(regularFont, 12);
+                cs.newLineAtOffset(margin, y);
+                cs.showText("Attempt ID: #" + result.getAttemptId());
+                cs.newLineAtOffset(0, -rowHeight);
+                cs.showText("Student: " + userRepository.findById(studentId).map(User::getUsername).orElse("unknown"));
+                cs.newLineAtOffset(0, -rowHeight);
+                cs.showText("Total Score: " + result.getTotalScore() + " / " + result.getMaxScore());
+                cs.newLineAtOffset(0, -rowHeight);
+                cs.showText("Percentage: " + String.format("%.2f", result.getPercentage()) + "%");
+                cs.newLineAtOffset(0, -rowHeight);
+                cs.showText("Status: " + (result.getPercentage() >= 50 ? "PASS" : "FAIL"));
+                cs.endText();
+            }
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            doc.save(baos);
+            return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"result-attempt-" + result.getAttemptId() + ".pdf\"")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(baos.toByteArray());
+        }
+    }
 }

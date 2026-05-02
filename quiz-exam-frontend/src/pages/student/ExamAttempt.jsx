@@ -33,6 +33,7 @@ export default function ExamAttempt() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const timerRef = useRef(null)
+  const submittingRef = useRef(false)
 
   // Load assigned paper and start/resume attempt
   useEffect(() => {
@@ -53,6 +54,8 @@ export default function ExamAttempt() {
   }, [id])
 
   const submit = useCallback(async (auto = false) => {
+    if (submittingRef.current) return
+    submittingRef.current = true
     clearInterval(timerRef.current)
     if (!attemptId) return
     try {
@@ -63,6 +66,7 @@ export default function ExamAttempt() {
       setSubmitted(true)
     } catch (e) {
       setError(e.message)
+      submittingRef.current = false
     }
   }, [attemptId, answers])
 

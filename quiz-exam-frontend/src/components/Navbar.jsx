@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 import styles from './Navbar.module.css'
 
 const roleLinks = {
@@ -37,6 +38,7 @@ function getActiveLink(links, pathname) {
 
 export default function Navbar() {
   const { session, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -124,6 +126,20 @@ export default function Navbar() {
             <p className={styles.userName}>{displayName}</p>
             <p className={styles.userRole}>{session.role.toLowerCase()}</p>
           </div>
+
+          <button
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label="Toggle theme"
+          >
+            <span className={styles.themeTrack}>
+              <span>🌙</span>
+              <span>☀️</span>
+            </span>
+            <span className={`${styles.themeThumb} ${theme === 'dark' ? styles.themeThumbDark : styles.themeThumbLight}`} />
+          </button>
+
           <button className={styles.avatarBtn} onClick={() => navigate('/profile')} title="Open profile">
             {initials}
           </button>

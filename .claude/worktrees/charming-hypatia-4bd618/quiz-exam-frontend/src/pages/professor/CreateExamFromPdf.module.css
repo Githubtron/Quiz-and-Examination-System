@@ -1,0 +1,233 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.4rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.header p {
+  margin: 0.24rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.dropzone {
+  border: 1px dashed rgba(108, 99, 255, 0.5);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.dropzone:hover {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
+  align-items: end;
+}
+
+.formRow label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+.formRow input,
+.formRow select,
+.editBox textarea,
+.editBox input,
+.editBox select,
+.editBox label textarea {
+  width: 100%;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+  font: inherit;
+}
+
+.primaryBtn,
+.secondaryBtn,
+.smallBtn,
+.dangerBtn {
+  border: 0;
+  border-radius: 9px;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.primaryBtn {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.secondaryBtn {
+  color: #c4bfff;
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.55);
+}
+
+.smallBtn {
+  background: rgba(108, 99, 255, 0.12);
+  color: #c4bfff;
+  border: 1px solid rgba(108, 99, 255, 0.38);
+}
+
+.dangerBtn {
+  color: #fca5a5;
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.primaryBtn:disabled,
+.secondaryBtn:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.error,
+.message {
+  border-radius: 10px;
+  padding: 0.62rem 0.82rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.42);
+}
+
+.message {
+  background: rgba(16, 185, 129, 0.12);
+  color: #86efac;
+  border: 1px solid rgba(16, 185, 129, 0.42);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.badge {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.42);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+
+.questionList {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.questionCard {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.82rem;
+  display: grid;
+  gap: 0.62rem;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.questionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.questionActions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.questionText {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.options {
+  margin: 0.25rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.correctOption {
+  color: #86efac;
+  font-weight: 700;
+}
+
+.explanation {
+  margin: 0.35rem 0 0;
+  color: var(--text-light);
+  font-size: 0.84rem;
+}
+
+.editBox {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.optionEditRow {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 1.1rem 0.9rem 1.3rem;
+  }
+}

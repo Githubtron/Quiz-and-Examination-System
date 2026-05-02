@@ -65,9 +65,9 @@
 
 .filters select,
 .filters input {
-  border: 1px solid #334155;
+  border: 1px solid var(--input-border);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.85);
+  background: var(--bg);
   color: var(--text);
   height: 44px;
 }
@@ -83,7 +83,7 @@
   border-radius: 12px;
   padding: 1rem;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
 }
 
 .qCard:hover {
@@ -151,8 +151,8 @@
   padding: 0.34rem 0.55rem;
   border-radius: 7px;
   color: var(--text-muted);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border);
+  background: var(--surface2);
 }
 
 .correct {
@@ -209,9 +209,9 @@
 .field input,
 .field select,
 .field textarea {
-  border: 1px solid #334155;
+  border: 1px solid var(--input-border);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.95);
+  background: var(--bg);
   color: var(--text);
   font-size: 0.88rem;
   resize: vertical;

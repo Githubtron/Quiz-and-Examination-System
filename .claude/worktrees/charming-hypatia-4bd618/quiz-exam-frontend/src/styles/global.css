@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #6c63ff;
+  --primary-dark: #4d45dd;
+  --primary-light: #958dff;
+  --secondary: #00bcd4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: rgba(148, 163, 184, 0.24);
+
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #cbd5e1;
+
+  --radius: 12px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 30px rgba(2, 6, 23, 0.5);
+  --transition: 0.22s ease;
+
+  --sidebar-width: 260px;
+  --topbar-height: 78px;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    color var(--transition),
+    opacity var(--transition);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.01);
+}
+
+button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  width: 100%;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.66rem 0.88rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.18);
+}
+
+.btnPrimary {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.btnSecondary {
+  background: transparent;
+  color: var(--primary-light);
+  border: 1px solid var(--primary);
+}
+
+.btnDanger {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.appShell {
+  min-height: 100vh;
+}
+
+.appMain {
+  min-height: 100vh;
+}
+
+.appMainAuthed {
+  padding-top: calc(var(--topbar-height) + 1.15rem);
+  padding-right: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: calc(var(--sidebar-width) + 0.25rem);
+}
+
+@media (max-width: 1024px) {
+  .appMainAuthed {
+    padding-left: 0;
+    padding-top: calc(var(--topbar-height) + 0.75rem);
+  }
+}
+
+/* Unified dark card look */
+.surfaceCard {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* Recharts dark theme */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted) !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--text-light) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  border-radius: 10px !important;
+  color: var(--text) !important;
+}
+
+/* Scrollbar */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0b1220;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #475569, #334155);
+  border-radius: 999px;
+  border: 2px solid #0b1220;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #64748b, #475569);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}

@@ -98,7 +98,14 @@ public class AnalyticsController {
      * Returns per-exam scores for a student (for line chart).
      */
     @GetMapping("/student/{studentId}/progress")
-    public ResponseEntity<List<Map<String, Object>>> studentProgress(@PathVariable long studentId) {
+    @PreAuthorize("hasAnyRole('PROFESSOR','ADMIN','STUDENT')")
+    public ResponseEntity<List<Map<String, Object>>> studentProgress(@PathVariable long studentId, 
+            @org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails principal) {
+        User currentUser = userRepository.findByUsername(principal.getUsername()).orElseThrow();
+        if (currentUser.getRole() == Role.STUDENT && currentUser.getId() != studentId) {
+            throw new org.springframework.security.access.AccessDeniedException("Cannot view other student's progress");
+        }
+        
         List<Result> results = resultRepository.findByStudentId(studentId);
         List<Map<String, Object>> progress = results.stream().map(r -> {
             Attempt attempt = attemptRepository.findById(r.getAttemptId()).orElse(null);

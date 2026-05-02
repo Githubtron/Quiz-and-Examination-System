@@ -9,6 +9,8 @@ import com.quizexam.repository.StudentExamPaperRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Isolation;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -102,10 +104,23 @@ public class ExamTemplateService {
             .orElse(0);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public StudentExamPaper getOrCreateStudentPaper(long examId, long studentId) {
-        Optional<StudentExamPaper> existing = studentExamPaperRepository.findByStudentIdAndExamId(studentId, examId);
-        if (existing.isPresent()) return existing.get();
+        // Clean up any duplicates first using native query
+        studentExamPaperRepository.deleteOldDuplicates(studentId, examId);
+        
+        // Now fetch the single remaining paper (returns list, we take first)
+        List<StudentExamPaper> papers = studentExamPaperRepository.findAllByStudentIdAndExamIdOrderByIdDesc(studentId, examId);
+        if (!papers.isEmpty()) {
+            return papers.get(0); // Get the most recent (order by id DESC)
+        }
+
+        Exam exam = examRepository.findById(examId)
+            .orElseThrow(() -> new IllegalArgumentException("Exam not found: " + examId));
+        
+        if ((exam.getQuestions() == null || exam.getQuestions().isEmpty()) && examTemplateRepository.findByExamId(examId).isEmpty()) {
+            throw new IllegalStateException("Exam has no questions assigned. Please add questions to this exam before students can attempt it.");
+        }
 
         Set<String> usedSignatures = studentExamPaperRepository.findByExamId(examId).stream()
             .map(StudentExamPaper::getQuestionIds)
@@ -134,9 +149,18 @@ public class ExamTemplateService {
         try {
             return studentExamPaperRepository.save(paper);
         } catch (DataIntegrityViolationException e) {
-            return studentExamPaperRepository.findByStudentIdAndExamId(studentId, examId)
-                .orElseThrow(() -> e);
+            // Another thread/request created the same paper, fetch it
+            List<StudentExamPaper> retry = studentExamPaperRepository.findAllByStudentIdAndExamIdOrderByIdDesc(studentId, examId);
+            if (!retry.isEmpty()) {
+                return retry.get(0);
+            }
+            // If still not found, re-throw with context
+            throw new IllegalStateException("Failed to create or retrieve student exam paper for exam=" + examId + ", student=" + studentId, e);
         }
+    }
+    
+    private void cleanupDuplicateStudentPapers(long examId, long studentId) {
+        // This method is no longer used - cleanup is done via native query in getOrCreateStudentPaper
     }
 
     @Transactional

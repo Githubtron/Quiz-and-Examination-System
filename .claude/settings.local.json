@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(ls \"C:\\\\Users\\\\prabhat\\\\OneDrive\\\\Desktop\\\\mini project\\\\quiz-exam-frontend\" | where { -not $_.PSIsContainer })"
+    ]
+  }
+}

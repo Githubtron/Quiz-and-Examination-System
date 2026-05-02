@@ -17,6 +17,7 @@
   --warning: #f59e0b;
   --danger: #ef4444;
 
+  /* dark theme (default) */
   --bg: #0f172a;
   --surface: #1e293b;
   --surface2: #334155;
@@ -26,14 +27,49 @@
   --text-muted: #94a3b8;
   --text-light: #cbd5e1;
 
-  --radius: 12px;
-  --radius-sm: 10px;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 12px 30px rgba(2, 6, 23, 0.5);
+
+  --nav-bg: linear-gradient(180deg, rgba(30, 41, 59, 0.97), rgba(15, 23, 42, 0.97));
+  --topbar-bg: rgba(15, 23, 42, 0.88);
+  --menu-toggle-bg: rgba(30, 41, 59, 0.85);
+  --backdrop-bg: rgba(2, 6, 23, 0.7);
+  --input-border: #334155;
+  --scrollbar-track: #0b1220;
+  --scrollbar-thumb: linear-gradient(180deg, #475569, #334155);
+  --scrollbar-thumb-hover: linear-gradient(180deg, #64748b, #475569);
+  --scrollbar-border: #0b1220;
+
+  --radius: 12px;
+  --radius-sm: 10px;
   --transition: 0.22s ease;
 
   --sidebar-width: 260px;
   --topbar-height: 78px;
+}
+
+[data-theme="light"] {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface2: #e2e8f0;
+  --border: rgba(100, 116, 139, 0.28);
+
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #475569;
+
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.13);
+
+  --nav-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(241, 245, 249, 0.97));
+  --topbar-bg: rgba(255, 255, 255, 0.92);
+  --menu-toggle-bg: rgba(241, 245, 249, 0.9);
+  --backdrop-bg: rgba(15, 23, 42, 0.5);
+  --input-border: #cbd5e1;
+  --scrollbar-track: #e2e8f0;
+  --scrollbar-thumb: linear-gradient(180deg, #94a3b8, #cbd5e1);
+  --scrollbar-thumb-hover: linear-gradient(180deg, #64748b, #94a3b8);
+  --scrollbar-border: #e2e8f0;
 }
 
 html,
@@ -99,7 +135,7 @@ textarea {
   width: 100%;
   color: var(--text);
   background: var(--bg);
-  border: 1px solid #334155;
+  border: 1px solid var(--input-border);
   border-radius: 10px;
   padding: 0.66rem 0.88rem;
 }
@@ -157,15 +193,15 @@ textarea:focus {
   }
 }
 
-/* Unified dark card look */
+/* Unified card look */
 .surfaceCard {
   background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
 
-/* Recharts dark theme */
+/* Recharts theme */
 .recharts-cartesian-axis-tick-value {
   fill: var(--text-muted) !important;
 }
@@ -175,8 +211,8 @@ textarea:focus {
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: rgba(15, 23, 42, 0.95) !important;
-  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 10px !important;
   color: var(--text) !important;
 }
@@ -188,17 +224,17 @@ textarea:focus {
 }
 
 *::-webkit-scrollbar-track {
-  background: #0b1220;
+  background: var(--scrollbar-track);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #475569, #334155);
+  background: var(--scrollbar-thumb);
   border-radius: 999px;
-  border: 2px solid #0b1220;
+  border: 2px solid var(--scrollbar-border);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #64748b, #475569);
+  background: var(--scrollbar-thumb-hover);
 }
 
 .sr-only {

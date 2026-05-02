@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(2, 6, 23, 0.7);
+  background: var(--backdrop-bg);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition);
@@ -19,8 +19,8 @@
   left: 0;
   bottom: 0;
   width: var(--sidebar-width);
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.96));
-  border-right: 1px solid rgba(148, 163, 184, 0.22);
+  background: var(--nav-bg);
+  border-right: 1px solid var(--border);
   padding: 1rem;
   z-index: 120;
   display: flex;
@@ -131,7 +131,7 @@
   flex-direction: column;
   gap: 0.55rem;
   padding-top: 0.6rem;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  border-top: 1px solid var(--border);
 }
 
 .profileBtn,
@@ -172,8 +172,8 @@
   right: 0;
   z-index: 110;
   height: var(--topbar-height);
-  background: rgba(15, 23, 42, 0.86);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--border);
   backdrop-filter: blur(14px);
   display: flex;
   align-items: center;
@@ -193,9 +193,9 @@
   height: 40px;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: rgba(30, 41, 59, 0.85);
+  background: var(--menu-toggle-bg);
   color: var(--text);
   font-size: 1.05rem;
 }
@@ -277,4 +277,58 @@
   .pageSub {
     display: none;
   }
+}
+
+/* ── Theme toggle switch ──────────────────────────────────────────────────── */
+.themeToggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.themeToggle:hover {
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+.themeToggle:hover:not(:disabled) {
+  transform: none;
+}
+
+.themeTrack {
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3px;
+  pointer-events: none;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.themeThumb {
+  position: absolute;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 2px 6px rgba(108, 99, 255, 0.45);
+  transition: left var(--transition);
+}
+
+.themeThumbDark {
+  left: 3px;
+}
+
+.themeThumbLight {
+  left: calc(100% - 23px);
 }

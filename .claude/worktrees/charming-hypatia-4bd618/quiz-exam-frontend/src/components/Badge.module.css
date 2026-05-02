@@ -1,0 +1,17 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.26rem 0.66rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.default  { background: rgba(148,163,184,.12); color: var(--text-muted); border-color: rgba(148,163,184,.35); }
+.success  { background: rgba(16,185,129,.14); color: #6ee7b7; border-color: rgba(16,185,129,.4); }
+.warning  { background: rgba(245,158,11,.14); color: #fcd34d; border-color: rgba(245,158,11,.45); }
+.danger   { background: rgba(239,68,68,.14); color: #fca5a5; border-color: rgba(239,68,68,.45); }
+.primary  { background: rgba(108,99,255,.16); color: #c4bfff; border-color: rgba(108,99,255,.45); }
+.info     { background: rgba(0,188,212,.14); color: #67e8f9; border-color: rgba(0,188,212,.45); }

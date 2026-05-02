@@ -6,8 +6,8 @@ import styles from './AuthPage.module.css'
 
 const ROLE_PRESETS = {
   ADMIN: { label: 'Admin', username: 'admin', password: 'admin123' },
-  PROFESSOR: { label: 'Professor', username: 'professor', password: 'prof123' },
-  STUDENT: { label: 'Student', username: 'student', password: 'student123' },
+  PROFESSOR: { label: 'Professor', username: 'prof_test', password: 'testprof12345' },
+  STUDENT: { label: 'Student', username: 'student_test', password: 'teststudent12345' },
 }
 
 export default function LoginPage() {

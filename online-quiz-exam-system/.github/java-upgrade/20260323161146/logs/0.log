@@ -1,0 +1,1002 @@
+2026-03-23T16:11:46.573Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:11:46.577Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "status": "failed"
+}}).
+2026-03-23T16:11:46.578Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:11:46.600Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:11:46.601Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:33:52.823Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:33:52.841Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "status": "succeeded",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:33:52.842Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:33:52.843Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:33:52.844Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:33:52.847Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:33:52.848Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "status": "succeeded",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:33:52.848Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:33:52.851Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:33:52.852Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:34:17.767Z [INFO] ---------------------prepare appmod-list-jdks----------------------
+2026-03-23T16:34:17.768Z [INFO] [Tool.prepareInvocation]({name: appmod-list-jdks, input: {
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:34:17.768Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:34:17.769Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List jdks"
+}}).
+2026-03-23T16:34:17.769Z [INFO] ----------------------prepared appmod-list-jdks----------------------
+2026-03-23T16:34:17.774Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-03-23T16:34:17.774Z [INFO] [Tool.invoke]({name: appmod-list-jdks, input: {
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:34:17.775Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:34:17.809Z [INFO] [Tool.invoke]({result: {
+  "message": "We found following jdks in your system:\n\n1. Java 25.0.1\n   📁 Path: C:\\Program Files\\Java\\jdk-25\\bin\n   🏷️ Source: PATH\n\nTotal: 1 JDK installation(s) found"
+}}).
+2026-03-23T16:34:17.810Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-03-23T16:34:21.324Z [INFO] ---------------------prepare appmod-list-mavens----------------------
+2026-03-23T16:34:21.325Z [INFO] [Tool.prepareInvocation]({name: appmod-list-mavens, input: {
+  "sessionId": "20260323161146",
+  "includeVersion": true
+}}).
+2026-03-23T16:34:21.326Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:34:21.326Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List mavens"
+}}).
+2026-03-23T16:34:21.327Z [INFO] ----------------------prepared appmod-list-mavens----------------------
+2026-03-23T16:34:21.332Z [INFO] ----------------------invoke appmod-list-mavens----------------------
+2026-03-23T16:34:21.333Z [INFO] [Tool.invoke]({name: appmod-list-mavens, input: {
+  "sessionId": "20260323161146",
+  "includeVersion": true
+}}).
+2026-03-23T16:34:21.334Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:34:21.341Z [INFO] [Tool.invoke]({result: {
+  "message": "No Maven installations found."
+}}).
+2026-03-23T16:34:21.342Z [INFO] ----------------------invoked appmod-list-mavens----------------------
+2026-03-23T16:38:01.120Z [INFO] ---------------------prepare appmod-install-maven----------------------
+2026-03-23T16:38:01.120Z [INFO] [Tool.prepareInvocation]({name: appmod-install-maven, input: {
+  "version": "latest",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:38:01.120Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:38:02.065Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Download and install Maven",
+  "confirmationMessages": {
+    "title": "Download and install Maven",
+    "message": "\nThis tool will download and install Maven latest from Apache with below settings.\n- **Version**: latest\n- **Vendor**: Apache\n- **Url**: https://dlcdn.apache.org/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.zip\n- **Destination**: `C:\\Users\\prabhat\\.maven`\n- **Checksum**: SHA512: 4122c5e7a8794260539dd8fcd78480549511babff2f85e2b1258c8d4cf33c50af90f65d323f43c88d4959f35a8f37ced3eca802983caa6eb7cc81b16af936ab0\n- **Signature**: https://dlcdn.apache.org/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.zip.asc\n- **Public Key**: https://downloads.apache.org/maven/KEYS\n"
+  }
+}}).
+2026-03-23T16:38:02.066Z [INFO] ----------------------prepared appmod-install-maven----------------------
+2026-03-23T16:38:21.239Z [INFO] ----------------------invoke appmod-install-maven----------------------
+2026-03-23T16:38:21.239Z [INFO] [Tool.invoke]({name: appmod-install-maven, input: {
+  "version": "latest",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:38:21.240Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:38:31.435Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "mvn",
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "version": "3.9.14"
+  },
+  "message": "Maven latest is installed at C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "telemetry": {
+    "tool": "Maven",
+    "version": "latest"
+  }
+}}).
+2026-03-23T16:38:31.436Z [INFO] ----------------------invoked appmod-install-maven----------------------
+2026-03-23T16:44:41.645Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:44:41.646Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planInitialized",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:41.646Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:41.647Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:44:41.648Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:44:41.653Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:44:41.653Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "planInitialized",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:41.655Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:41.657Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planInitialized' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:44:41.658Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:44:46.264Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:44:46.266Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "environmentAnalyzed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:46.267Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:46.268Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:44:46.268Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:44:46.272Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:44:46.273Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "environmentAnalyzed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:46.274Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:46.276Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'environmentAnalyzed' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:44:46.276Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:44:49.842Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:44:49.843Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "dependenciesAnalyzed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:49.843Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:49.844Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:44:49.845Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:44:49.848Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:44:49.849Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "dependenciesAnalyzed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:49.849Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:49.851Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'dependenciesAnalyzed' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:44:49.851Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:44:53.026Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:44:53.027Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "upgradePathDesigned",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:53.027Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:53.029Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:44:53.029Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:44:53.033Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:44:53.034Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "upgradePathDesigned",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:53.034Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:53.035Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradePathDesigned' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:44:53.036Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:44:55.888Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:44:55.888Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planReviewed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:55.889Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:55.890Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:44:55.890Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:44:55.893Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:44:55.893Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "planReviewed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:44:55.894Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:55.895Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planReviewed' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:44:55.895Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:44:58.637Z [INFO] ---------------------prepare appmod-confirm-upgrade-plan----------------------
+2026-03-23T16:44:58.638Z [INFO] [Tool.prepareInvocation]({name: appmod-confirm-upgrade-plan, input: {
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:44:58.639Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:44:58.640Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Review [upgrade plan](file:///c:/Users/prabhat/OneDrive/Desktop/mini project/online-quiz-exam-system/.github/java-upgrade/20260323161146/plan.md)",
+  "confirmationMessages": {
+    "title": "Plan generated",
+    "message": "Please review the generated plan and make any necessary adjustments before proceeding. You can modify the generated [`plan.md`](file:///c:/Users/prabhat/OneDrive/Desktop/mini project/online-quiz-exam-system/.github/java-upgrade/20260323161146/plan.md) directly."
+  }
+}}).
+2026-03-23T16:44:58.640Z [INFO] ----------------------prepared appmod-confirm-upgrade-plan----------------------
+2026-03-23T16:44:58.644Z [INFO] ----------------------invoke appmod-confirm-upgrade-plan----------------------
+2026-03-23T16:44:58.645Z [INFO] [Tool.invoke]({name: appmod-confirm-upgrade-plan, input: {
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:44:58.646Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:44:58.646Z [INFO] Upgrade plan confirmed successfully.
+2026-03-23T16:44:58.666Z [INFO] [Tool.invoke]({result: {
+  "message": "Generated plan is reviewed and confirmed by the user! the upgrade process will start now and be tracked in markdown file: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146\\progress.md."
+}}).
+2026-03-23T16:44:58.673Z [INFO] ----------------------invoked appmod-confirm-upgrade-plan----------------------
+2026-03-23T16:45:03.126Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:45:03.127Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planConfirmed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:45:03.128Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:45:03.129Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:45:03.130Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:45:03.133Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:45:03.134Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "planConfirmed",
+  "phase": "plan",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:45:03.135Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:45:03.136Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planConfirmed' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:45:03.138Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:45:06.753Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:45:06.755Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planExecutionStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:45:06.755Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:45:06.756Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:45:06.757Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:45:06.759Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:45:06.760Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "planExecutionStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:45:06.761Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:45:06.815Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planExecutionStarted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:45:06.816Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:45:53.479Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:45:53.480Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "environmentSetup",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded",
+  "details": {
+    "jdkPath": "C:\\Program Files\\Java\\jdk-25",
+    "buildToolPath": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin\\mvn"
+  }
+}}).
+2026-03-23T16:45:53.481Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:45:53.482Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:45:53.483Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:45:53.486Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:45:53.487Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "environmentSetup",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded",
+  "details": {
+    "jdkPath": "C:\\Program Files\\Java\\jdk-25",
+    "buildToolPath": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin\\mvn"
+  }
+}}).
+2026-03-23T16:45:53.487Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:45:53.489Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-23T16:45:53.490Z [INFO] Project java version: 17
+2026-03-23T16:45:53.492Z [INFO] Maven project detected.
+2026-03-23T16:45:53.493Z [INFO] Build tool type: mvn
+2026-03-23T16:45:53.494Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "17"
+}
+2026-03-23T16:45:53.495Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin\\mvn\\bin",
+  "version": ""
+}
+2026-03-23T16:45:53.495Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin\\mvn\\bin",
+    "name": "mvn",
+    "version": ""
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "17"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-23T16:45:53.911Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'environmentSetup' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:45:53.912Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:45:58.061Z [INFO] ---------------------prepare appmod-list-jdks----------------------
+2026-03-23T16:45:58.062Z [INFO] [Tool.prepareInvocation]({name: appmod-list-jdks, input: {
+  "sessionId": "20260323161146",
+  "version": "17"
+}}).
+2026-03-23T16:45:58.063Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:45:58.064Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List jdks"
+}}).
+2026-03-23T16:45:58.065Z [INFO] ----------------------prepared appmod-list-jdks----------------------
+2026-03-23T16:45:58.068Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-03-23T16:45:58.069Z [INFO] [Tool.invoke]({name: appmod-list-jdks, input: {
+  "sessionId": "20260323161146",
+  "version": "17"
+}}).
+2026-03-23T16:45:58.070Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:45:58.103Z [INFO] [Tool.invoke]({result: {
+  "message": "No JDK installations found."
+}}).
+2026-03-23T16:45:58.104Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-03-23T16:46:00.670Z [INFO] ---------------------prepare appmod-install-jdk----------------------
+2026-03-23T16:46:00.671Z [INFO] [Tool.prepareInvocation]({name: appmod-install-jdk, input: {
+  "sessionId": "20260323161146",
+  "version": "17"
+}}).
+2026-03-23T16:46:00.672Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:46:05.065Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Download and install JDK",
+  "confirmationMessages": {
+    "title": "Download and install JDK",
+    "message": "\nThis tool will download and install JDK 17 from Microsoft with below settings.\n- **Version**: 17\n- **Vendor**: Microsoft\n- **Url**: https://aka.ms/download-jdk/microsoft-jdk-17.0.16-windows-x64.zip\n- **Destination**: `C:\\Users\\prabhat\\.jdk`\n- **Checksum**: SHA256: 53f0c9ec64811a9ab968747076653e5500115db7230d244e4ec53577ca5ec8fc\n- **Signature**: https://aka.ms/download-jdk/microsoft-jdk-17.0.16-windows-x64.zip.sig\n- **Public Key**: http://aka.ms/microsoft_jdk_public_key\n"
+  }
+}}).
+2026-03-23T16:46:05.067Z [INFO] ----------------------prepared appmod-install-jdk----------------------
+2026-03-23T16:46:05.072Z [INFO] ----------------------invoke appmod-install-jdk----------------------
+2026-03-23T16:46:05.073Z [INFO] [Tool.invoke]({name: appmod-install-jdk, input: {
+  "sessionId": "20260323161146",
+  "version": "17"
+}}).
+2026-03-23T16:46:05.074Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:50:54.868Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "java",
+    "path": "C:\\Users\\prabhat\\.jdk\\jdk-17.0.16\\bin",
+    "version": "17.0.16"
+  },
+  "message": "JDK 17 is installed at C:\\Users\\prabhat\\.jdk\\jdk-17.0.16\\bin",
+  "telemetry": {
+    "tool": "JDK",
+    "version": "17"
+  }
+}}).
+2026-03-23T16:50:54.868Z [INFO] ----------------------invoked appmod-install-jdk----------------------
+2026-03-23T16:53:48.512Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:53:48.512Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "baselineSetup",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:53:48.513Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:53:48.514Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:53:48.515Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:53:48.518Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:53:48.518Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "baselineSetup",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:53:48.518Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:53:48.520Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'baselineSetup' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:53:48.521Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:53:52.810Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:53:52.810Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade to Spring Boot 3.5.x"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:53:52.811Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:53:52.811Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:53:52.812Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:53:52.815Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:53:52.816Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade to Spring Boot 3.5.x"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:53:52.816Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:53:52.817Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:53:52.818Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:54:37.306Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:54:37.307Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade to Spring Boot 3.5.x",
+    "commitId": "N/A"
+  },
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:54:37.308Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:54:37.308Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:54:37.309Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:54:37.312Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:54:37.312Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade to Spring Boot 3.5.x",
+    "commitId": "N/A"
+  },
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:54:37.313Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:54:37.359Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:54:37.359Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:54:41.288Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:54:41.289Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Upgrade to Java 25"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:54:41.289Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:54:41.290Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:54:41.290Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:54:41.293Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:54:41.294Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Upgrade to Java 25"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:54:41.295Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:54:41.297Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:54:41.298Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:05.492Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:05.493Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "commitId": "N/A",
+    "stepNumber": 4,
+    "stepTitle": "Upgrade to Java 25"
+  },
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:05.493Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:05.494Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:05.495Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:05.498Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:05.498Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "commitId": "N/A",
+    "stepNumber": 4,
+    "stepTitle": "Upgrade to Java 25"
+  },
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:05.499Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:05.542Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:05.543Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:10.113Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:10.114Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 5,
+    "stepTitle": "Final Validation"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:10.115Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:10.115Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:10.116Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:10.118Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:10.120Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 5,
+    "stepTitle": "Final Validation"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:10.121Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:10.122Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:10.123Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:41.031Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:41.032Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "buildCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:41.033Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:41.033Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:41.034Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:41.037Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:41.038Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "buildCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:41.039Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:41.041Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-23T16:56:41.044Z [INFO] Project java version: 25
+2026-03-23T16:56:41.045Z [INFO] Maven project detected.
+2026-03-23T16:56:41.046Z [INFO] Build tool type: mvn
+2026-03-23T16:56:41.139Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-23T16:56:41.152Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": "",
+  "source": "install"
+}
+2026-03-23T16:56:41.153Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": "",
+    "source": "install"
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-23T16:56:41.154Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:56:41.155Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:56:41.155Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-9c0dbc9e-0c15-4a1a-a70a-62309c7c2ce3.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:56:41.199Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-9c0dbc9e-0c15-4a1a-a70a-62309c7c2ce3.log'
+2026-03-23T16:56:41.200Z [INFO] [BaseBuildTool] Found 0 modules: 
+2026-03-23T16:56:41.201Z [INFO] [BaseBuildTool] Finish counting Java and class files
+2026-03-23T16:56:41.201Z [INFO] [MavenBuildTool] Cleaning c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-23T16:56:41.202Z [INFO] [Environment] Running command (Java undefined): mvn clean -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:56:41.242Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:56:41.242Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:56:41.243Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-7c20360f-e963-42ed-a32c-b40edae3ceb6.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:56:41.290Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-7c20360f-e963-42ed-a32c-b40edae3ceb6.log'
+2026-03-23T16:56:41.292Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'buildCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:41.292Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:45.141Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:45.141Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "testCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:45.143Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:45.143Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:45.144Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:45.147Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:45.148Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "testCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:45.149Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:45.150Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-23T16:56:45.152Z [INFO] Project java version: 25
+2026-03-23T16:56:45.153Z [INFO] Maven project detected.
+2026-03-23T16:56:45.153Z [INFO] Build tool type: mvn
+2026-03-23T16:56:45.217Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-23T16:56:45.229Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": "",
+  "source": "install"
+}
+2026-03-23T16:56:45.229Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": "",
+    "source": "install"
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-23T16:56:45.230Z [INFO] [BaseBuildTool] Gathering test results...
+2026-03-23T16:56:45.296Z [INFO] [BaseBuildTool] Summarizing surefire reports.
+2026-03-23T16:56:45.298Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'testCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:45.299Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:49.766Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:49.767Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "commitId": "N/A",
+    "stepNumber": 5,
+    "stepTitle": "Final Validation"
+  },
+  "event": "upgradeValidationCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:49.768Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:49.769Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:49.769Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:49.773Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:49.773Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "details": {
+    "commitId": "N/A",
+    "stepNumber": 5,
+    "stepTitle": "Final Validation"
+  },
+  "event": "upgradeValidationCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:49.774Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:49.776Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeValidationCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:49.776Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:56:54.026Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:56:54.027Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planExecutionCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:54.027Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:56:54.028Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:56:54.029Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:56:54.032Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:56:54.032Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "planExecutionCompleted",
+  "phase": "execute",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded"
+}}).
+2026-03-23T16:56:54.033Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:56:54.071Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planExecutionCompleted' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:56:54.072Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-03-23T16:58:42.665Z [INFO] ---------------------prepare appmod-validate-cves-for-java----------------------
+2026-03-23T16:58:42.666Z [INFO] [Tool.prepareInvocation]({name: appmod-validate-cves-for-java, input: {
+  "dependencies": [
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.3.0",
+    "org.springframework.boot:spring-boot-starter-web:3.5.0",
+    "org.springframework.boot:spring-boot-starter-security:3.5.0",
+    "org.springframework.boot:spring-boot-starter-data-jpa:3.5.0",
+    "org.springframework.boot:spring-boot-starter-validation:3.5.0",
+    "org.springframework.boot:spring-boot-starter-test:3.5.0",
+    "org.springframework.security:spring-security-test:6.3.0",
+    "com.h2database:h2:2.2.226"
+  ],
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:58:42.667Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:58:42.667Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Validate CVEs"
+}}).
+2026-03-23T16:58:42.668Z [INFO] ----------------------prepared appmod-validate-cves-for-java----------------------
+2026-03-23T16:58:42.672Z [INFO] ----------------------invoke appmod-validate-cves-for-java----------------------
+2026-03-23T16:58:42.673Z [INFO] [Tool.invoke]({name: appmod-validate-cves-for-java, input: {
+  "dependencies": [
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.3.0",
+    "org.springframework.boot:spring-boot-starter-web:3.5.0",
+    "org.springframework.boot:spring-boot-starter-security:3.5.0",
+    "org.springframework.boot:spring-boot-starter-data-jpa:3.5.0",
+    "org.springframework.boot:spring-boot-starter-validation:3.5.0",
+    "org.springframework.boot:spring-boot-starter-test:3.5.0",
+    "org.springframework.security:spring-security-test:6.3.0",
+    "com.h2database:h2:2.2.226"
+  ],
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146"
+}}).
+2026-03-23T16:58:42.673Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:58:42.675Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-23T16:58:42.677Z [INFO] Project java version: 25
+2026-03-23T16:58:42.678Z [INFO] Maven project detected.
+2026-03-23T16:58:42.679Z [INFO] Build tool type: mvn
+2026-03-23T16:58:42.729Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-23T16:58:42.735Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": "",
+  "source": "install"
+}
+2026-03-23T16:58:42.736Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": "",
+    "source": "install"
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-23T16:58:42.737Z [INFO] [Environment] Running command (Java undefined): mvn dependency:tree -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.775Z [ERROR] [MavenBuildTool] Failed to get dependencies from dependency tree: Error: Failed to run command: "mvn dependency:tree -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.776Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.823Z [ERROR] [MavenBuildTool] Failed to get dependencies from effective pom: Error: Failed to run command: "mvn help:effective-pom -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.825Z [INFO] [MavenBuildTool] Getting Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system from pom.xml
+2026-03-23T16:58:42.826Z [INFO] [MavenBuildTool] Searching for pom.xml files in c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.827Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.827Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.828Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-76d56d81-9077-431c-8a96-1c20fc80618d.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.882Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-76d56d81-9077-431c-8a96-1c20fc80618d.log'
+2026-03-23T16:58:42.883Z [INFO] [MavenBuildTool] Found pom.xml files: 
+2026-03-23T16:58:42.884Z [INFO] [Environment] Running command (Java undefined): mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.934Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:42.963Z [ERROR] [MavenBuildTool] Failed to get Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.997Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.998Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-23T16:58:42.999Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-afc09ba1-bb3b-4d91-a744-c70084d999f2.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-23T16:58:43.038Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-afc09ba1-bb3b-4d91-a744-c70084d999f2.log'
+2026-03-23T16:58:43.040Z [INFO] Getting CVEs for dependencies: io.jsonwebtoken:jjwt-api:0.12.5,io.jsonwebtoken:jjwt-impl:0.12.5,io.jsonwebtoken:jjwt-jackson:0.12.5,org.apache.pdfbox:pdfbox:3.0.2,com.mysql:mysql-connector-j:8.3.0,org.springframework.boot:spring-boot-starter-web:3.5.0,org.springframework.boot:spring-boot-starter-security:3.5.0,org.springframework.boot:spring-boot-starter-data-jpa:3.5.0,org.springframework.boot:spring-boot-starter-validation:3.5.0,org.springframework.boot:spring-boot-starter-test:3.5.0,org.springframework.security:spring-security-test:6.3.0,com.h2database:h2:2.2.226
+2026-03-23T16:58:43.041Z [INFO] getting CVEs for dependencies:
+ - io.jsonwebtoken:jjwt-api:0.12.5
+  - io.jsonwebtoken:jjwt-impl:0.12.5
+  - io.jsonwebtoken:jjwt-jackson:0.12.5
+  - org.apache.pdfbox:pdfbox:3.0.2
+  - com.mysql:mysql-connector-j:8.3.0
+  - org.springframework.boot:spring-boot-starter-web:3.5.0
+  - org.springframework.boot:spring-boot-starter-security:3.5.0
+  - org.springframework.boot:spring-boot-starter-data-jpa:3.5.0
+  - org.springframework.boot:spring-boot-starter-validation:3.5.0
+  - org.springframework.boot:spring-boot-starter-test:3.5.0
+  - org.springframework.security:spring-security-test:6.3.0
+  - com.h2database:h2:2.2.226...
+2026-03-23T16:58:43.041Z [INFO] getting gitHub access token...
+2026-03-23T16:58:50.999Z [INFO] Processing batch 1/1, size: 12
+2026-03-23T16:58:51.001Z [INFO] Proxy configuration: HTTPS_PROXY=(not set), HTTP_PROXY=(not set), NO_PROXY=(not set), NODE_EXTRA_CA_CERTS=(not set), vscode http.proxy=(not set), hasProxy=false
+2026-03-23T16:58:51.002Z [INFO] No proxy detected, using direct connection.
+2026-03-23T16:58:51.006Z [INFO] listing CVEs from GitHub for dependencies [
+  "io.jsonwebtoken:jjwt-api:0.12.5",
+  "io.jsonwebtoken:jjwt-impl:0.12.5",
+  "io.jsonwebtoken:jjwt-jackson:0.12.5",
+  "org.apache.pdfbox:pdfbox:3.0.2",
+  "com.mysql:mysql-connector-j:8.3.0",
+  "org.springframework.boot:spring-boot-starter-web:3.5.0",
+  "org.springframework.boot:spring-boot-starter-security:3.5.0",
+  "org.springframework.boot:spring-boot-starter-data-jpa:3.5.0",
+  "org.springframework.boot:spring-boot-starter-validation:3.5.0",
+  "org.springframework.boot:spring-boot-starter-test:3.5.0",
+  "org.springframework.security:spring-security-test:6.3.0",
+  "com.h2database:h2:2.2.226"
+]
+2026-03-23T16:58:51.866Z [INFO] Fetched 1 total advisories across all pages
+2026-03-23T16:58:51.866Z [INFO] grouping CVEs and finding max patched version by dep...
+2026-03-23T16:58:51.867Z [INFO] done getting 0 CVEs for 12 dependencies
+2026-03-23T16:58:51.869Z [INFO] calculating patched version by dep...
+2026-03-23T16:58:51.869Z [INFO] finished getting CVEs for dependencies.
+2026-03-23T16:58:51.870Z [INFO] Found 0 dependencies with known CVEs
+2026-03-23T16:58:51.871Z [INFO] No known CVEs that need to be fixed are found for dependencies: io.jsonwebtoken:jjwt-api:0.12.5,io.jsonwebtoken:jjwt-impl:0.12.5,io.jsonwebtoken:jjwt-jackson:0.12.5,org.apache.pdfbox:pdfbox:3.0.2,com.mysql:mysql-connector-j:8.3.0,org.springframework.boot:spring-boot-starter-web:3.5.0,org.springframework.boot:spring-boot-starter-security:3.5.0,org.springframework.boot:spring-boot-starter-data-jpa:3.5.0,org.springframework.boot:spring-boot-starter-validation:3.5.0,org.springframework.boot:spring-boot-starter-test:3.5.0,org.springframework.security:spring-security-test:6.3.0,com.h2database:h2:2.2.226
+2026-03-23T16:58:51.872Z [INFO] [Tool.invoke]({result: {
+  "message": "No known CVEs that need to be fixed are found for the given dependencies."
+}}).
+2026-03-23T16:58:51.872Z [INFO] ----------------------invoked appmod-validate-cves-for-java----------------------
+2026-03-23T16:59:19.056Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-03-23T16:59:19.057Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "summaryGenerated",
+  "phase": "summarize",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded",
+  "message": "Java upgrade completed successfully: Java 17→25, Spring Boot 3.2.4→3.5.0. All tests passing (100%), no CVEs detected, all upgrade goals met."
+}}).
+2026-03-23T16:59:19.057Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-23T16:59:19.057Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-23T16:59:19.058Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-03-23T16:59:19.061Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-03-23T16:59:19.062Z [INFO] [Tool.invoke]({name: appmod-report-event, input: {
+  "event": "summaryGenerated",
+  "phase": "summarize",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260323161146",
+  "status": "succeeded",
+  "message": "Java upgrade completed successfully: Java 17→25, Spring Boot 3.2.4→3.5.0. All tests passing (100%), no CVEs detected, all upgrade goals met."
+}}).
+2026-03-23T16:59:19.062Z [INFO] [Tool.invoke] do invoke.
+2026-03-23T16:59:19.107Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'summaryGenerated' reported!\nSession ID: 20260323161146,\nSession Dir: c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system\\.github\\java-upgrade\\20260323161146"
+}}).
+2026-03-23T16:59:19.107Z [INFO] ----------------------invoked appmod-report-event----------------------

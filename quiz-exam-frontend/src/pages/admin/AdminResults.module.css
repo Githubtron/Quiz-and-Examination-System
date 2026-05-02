@@ -119,9 +119,9 @@
 
 .search {
   max-width: 360px;
-  border: 1px solid #334155;
+  border: 1px solid var(--input-border);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.95);
+  background: var(--bg);
 }
 
 .tableWrap {

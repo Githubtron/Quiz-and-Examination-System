@@ -21,6 +21,14 @@ async function request(method, path, body) {
     body: body !== undefined ? JSON.stringify(body) : undefined,
   })
   if (!res.ok) {
+    if (res.status === 401) {
+      // Token is expired or invalid. Clear session and reload.
+      localStorage.removeItem('qm_session')
+      window.dispatchEvent(new Event('storage')) // Trigger auth context update if listening, or just force reload
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/landing') {
+        window.location.href = '/login'
+      }
+    }
     const err = await res.json().catch(() => ({ error: res.statusText }))
     throw new Error(err.error || `Request failed: ${res.status}`)
   }
@@ -128,6 +136,7 @@ export const results = {
   get: (id) => request('GET', `/api/results/${id}`),
   exportCsv: (examId) => download(`/api/results/exam/${examId}/export/csv`),
   exportPdf: (examId) => download(`/api/results/exam/${examId}/export/pdf`),
+  exportSinglePdf: (id) => download(`/api/results/${id}/export/pdf`),
 }
 
 // ── Analytics ─────────────────────────────────────────────────────────────────

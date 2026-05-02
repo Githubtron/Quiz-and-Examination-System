@@ -1,0 +1,170 @@
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.4rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.addBtn {
+  border: none;
+  color: #fff;
+  padding: 0.58rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.msg {
+  background: rgba(16, 185, 129, 0.14);
+  color: #86efac;
+  border: 1px solid rgba(16, 185, 129, 0.42);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.83rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 0.83rem;
+  line-height: 1.45;
+  min-height: 2.4rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.editBtn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.5);
+  color: #c4bfff;
+  padding: 0.43rem 0.9rem;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  padding: 0.43rem 0.9rem;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1.7rem 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.field input,
+.field textarea {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+  resize: vertical;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.55);
+  color: #c4bfff;
+  padding: 0.53rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.submitBtn {
+  border: none;
+  color: #fff;
+  padding: 0.53rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 1.1rem 0.9rem 1.3rem;
+  }
+}

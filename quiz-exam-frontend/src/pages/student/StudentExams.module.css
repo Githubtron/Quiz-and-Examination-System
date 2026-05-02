@@ -30,9 +30,9 @@
 }
 
 .search {
-  border: 1px solid #334155;
+  border: 1px solid var(--input-border);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--bg);
   color: var(--text);
   height: 44px;
 }

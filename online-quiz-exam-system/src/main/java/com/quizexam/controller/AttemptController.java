@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quizexam.model.Attempt;
 import com.quizexam.model.Attempt.AttemptStatus;
 import com.quizexam.model.AttemptAnswer;
+import com.quizexam.model.AssertionReasonQuestion;
 import com.quizexam.model.Exam;
+import com.quizexam.model.MCQ;
 import com.quizexam.model.Question;
 import com.quizexam.model.Result;
+import com.quizexam.model.TrueFalseQuestion;
 import com.quizexam.repository.AttemptAnswerRepository;
 import com.quizexam.repository.AttemptRepository;
 import com.quizexam.repository.ExamRepository;
@@ -19,6 +22,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -68,21 +73,20 @@ public class AttemptController {
             return ResponseEntity.badRequest().body(Map.of("error", "Exam is not active"));
         }
 
-        Attempt attempt;
-        boolean resumed;
+        Attempt attempt = null;
+        boolean resumed = false;
         var existing = attemptRepository.findByStudentIdAndExamId(studentId, examId);
-        if (existing.isPresent()) {
-            Attempt current = existing.get();
-            if (current.getStatus() == AttemptStatus.SUBMITTED) {
-                return ResponseEntity.badRequest().body(Map.of("error", "Already submitted"));
+        if (existing != null && existing.getStatus() == AttemptStatus.IN_PROGRESS) {
+            if (isAttemptExpired(existing, exam, now)) {
+                submitAttempt(existing, exam, Map.of(), now);
+                // Expired attempt submitted, will fall through to create a new one
+            } else {
+                attempt = existing;
+                resumed = true;
             }
-            if (isAttemptExpired(current, exam, now)) {
-                submitAttempt(current, exam, Map.of(), now);
-                return ResponseEntity.badRequest().body(Map.of("error", "Time is over. Attempt auto-submitted"));
-            }
-            attempt = current;
-            resumed = true;
-        } else {
+        }
+
+        if (!resumed) {
             if (exam.getStartDatetime() != null && now.isBefore(exam.getStartDatetime())) {
                 return ResponseEntity.badRequest().body(Map.of("error", "Exam has not started yet"));
             }
@@ -95,7 +99,6 @@ public class AttemptController {
             created.setStartedAt(now);
             created.setStatus(AttemptStatus.IN_PROGRESS);
             attempt = attemptRepository.save(created);
-            resumed = false;
         }
 
         List<ExamTemplateService.StudentQuestion> studentQuestions;
@@ -225,9 +228,26 @@ public class AttemptController {
             Map<String, Object> questionDetail = new LinkedHashMap<>();
             questionDetail.put("questionId", q.getId());
             questionDetail.put("questionType", q.getType());
+            questionDetail.put("questionText", q.getText());
             questionDetail.put("studentAnswer", given);
             questionDetail.put("correctAnswer", q.getCorrectAnswerValue());
             questionDetail.put("isCorrect", isCorrect);
+
+            if (q instanceof MCQ mcq) {
+                questionDetail.put("options", mcq.getOptionTexts());
+            } else if (q instanceof TrueFalseQuestion) {
+                questionDetail.put("options", List.of("True", "False"));
+            } else if (q instanceof AssertionReasonQuestion ar) {
+                questionDetail.put("assertion", ar.getAssertion());
+                questionDetail.put("reason", ar.getReason());
+                questionDetail.put("options", List.of(
+                    "Both A and R are true, and R is the correct explanation of A",
+                    "Both A and R are true, but R is not the correct explanation of A",
+                    "A is true but R is false",
+                    "A is false but R is true"
+                ));
+            }
+
             detail.add(questionDetail);
         }
 
@@ -248,7 +268,11 @@ public class AttemptController {
         result.setMaxScore(maxScore);
         result.setPercentage(percentage);
         result.setDetailJson(toDetailJson(detail));
-        resultRepository.save(result);
+        try {
+            resultRepository.save(result);
+        } catch (DataIntegrityViolationException ignored) {
+            // Concurrent submission — a result already exists for this attempt; that's fine
+        }
 
         return new SubmissionResult(correct, assignedQuestions.size(), totalScore, maxScore, percentage);
     }

@@ -1,0 +1,477 @@
+2026-03-29T05:39:04.664Z [INFO] ----------------------invoke appmod-build-java-project----------------------
+2026-03-29T05:39:04.664Z [INFO] [Tool.invoke]({name: appmod-build-java-project, input: {
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260329110402",
+  "jdkPath": "C:\\Program Files\\Java\\jdk-25",
+  "buildToolPath": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin"
+}}).
+2026-03-29T05:39:04.665Z [INFO] [Tool.invoke] do invoke.
+2026-03-29T05:39:04.666Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-29T05:39:04.668Z [INFO] Project java version: 25
+2026-03-29T05:39:04.669Z [INFO] Build tool type detected from path: mvn
+2026-03-29T05:39:04.671Z [INFO] Build tool type: mvn
+2026-03-29T05:39:04.671Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-29T05:39:04.672Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": ""
+}
+2026-03-29T05:39:04.672Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": ""
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-29T05:39:04.673Z [INFO] [MavenBuildTool] Getting build errors of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:04.674Z [INFO] [Environment] Running command (Java undefined): mvn clean test-compile -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.704Z [WARN] Initial mvn clean compile failed, attempting mvn clean install to fix dependency errors.
+2026-03-29T05:39:04.705Z [INFO] [MavenBuildTool] Getting build errors of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:04.706Z [INFO] [Environment] Running command (Java undefined): mvn clean install -DskipTests -Dgpg.skip -Ddockerfile.skip -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.736Z [INFO] [Environment] Running command (Java undefined): mvn clean test-compile -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.755Z [INFO] [MavenBuildTool] parsing compilation errors.
+2026-03-29T05:39:04.756Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:04.757Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:04.757Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-bc5189a3-630b-4034-965c-f72adbf5e2a8.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.785Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-bc5189a3-630b-4034-965c-f72adbf5e2a8.log'
+2026-03-29T05:39:04.786Z [INFO] [BaseBuildTool] Found 0 modules: 
+2026-03-29T05:39:04.786Z [INFO] [BaseBuildTool] Finish counting Java and class files
+2026-03-29T05:39:04.787Z [INFO] [MavenBuildTool] Cleaning c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:04.787Z [INFO] [Environment] Running command (Java undefined): mvn clean -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.820Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:04.821Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:04.821Z [INFO] Build succeeded! There are no build errors in the project.
+2026-03-29T05:39:04.822Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-39bcc751-7622-4780-ace4-07f10033a543.log
+2026-03-29T05:39:04.833Z [INFO] [Tool.invoke]({result: {
+  "message": "Build succeeded! There are no build errors in the project.",
+  "result": {
+    "numOfJavaFiles": 0,
+    "numOfClassFiles": 0,
+    "errors": [],
+    "command": "mvn clean test-compile -q -B -fn"
+  },
+  "telemetry": {
+    "result": "succeeded"
+  }
+}}).
+2026-03-29T05:39:04.833Z [INFO] ----------------------invoked appmod-build-java-project----------------------
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:04.867Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-39bcc751-7622-4780-ace4-07f10033a543.log'
+2026-03-29T05:39:31.599Z [INFO] ---------------------prepare appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:31.600Z [INFO] [Tool.prepareInvocation]({name: appmod-validate-cves-for-java, input: {
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "dependencies": [
+    "com.azure:azure-security-keyvault-secrets:4.9.3",
+    "com.azure:azure-identity:1.15.4",
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.0.35"
+  ],
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:31.601Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-29T05:39:31.602Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Validate CVEs"
+}}).
+2026-03-29T05:39:31.602Z [INFO] ----------------------prepared appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:31.607Z [INFO] ----------------------invoke appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:31.608Z [INFO] [Tool.invoke]({name: appmod-validate-cves-for-java, input: {
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "dependencies": [
+    "com.azure:azure-security-keyvault-secrets:4.9.3",
+    "com.azure:azure-identity:1.15.4",
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.0.35"
+  ],
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:31.609Z [INFO] [Tool.invoke] do invoke.
+2026-03-29T05:39:31.610Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-29T05:39:31.611Z [INFO] Project java version: 25
+2026-03-29T05:39:31.612Z [INFO] Maven project detected.
+2026-03-29T05:39:31.612Z [INFO] Build tool type: mvn
+2026-03-29T05:39:31.701Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-29T05:39:31.723Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": "",
+  "source": "install"
+}
+2026-03-29T05:39:31.738Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": "",
+    "source": "install"
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-29T05:39:31.740Z [INFO] [Environment] Running command (Java undefined): mvn dependency:tree -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.773Z [ERROR] [MavenBuildTool] Failed to get dependencies from dependency tree: Error: Failed to run command: "mvn dependency:tree -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.773Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.806Z [ERROR] [MavenBuildTool] Failed to get dependencies from effective pom: Error: Failed to run command: "mvn help:effective-pom -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.808Z [INFO] [MavenBuildTool] Getting Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system from pom.xml
+2026-03-29T05:39:31.809Z [INFO] [MavenBuildTool] Searching for pom.xml files in c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.809Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.809Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.810Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-f1f2265c-09b4-4bc1-941b-432e4735edae.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.840Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-f1f2265c-09b4-4bc1-941b-432e4735edae.log'
+2026-03-29T05:39:31.841Z [INFO] [MavenBuildTool] Found pom.xml files: 
+2026-03-29T05:39:31.842Z [INFO] [Environment] Running command (Java undefined): mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.874Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.901Z [ERROR] [MavenBuildTool] Failed to get Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.924Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.924Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:31.925Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-ef26e058-51de-4039-bfb9-0b439b6f420a.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:31.954Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-ef26e058-51de-4039-bfb9-0b439b6f420a.log'
+2026-03-29T05:39:31.956Z [INFO] Getting CVEs for dependencies: com.azure:azure-security-keyvault-secrets:4.9.3,com.azure:azure-identity:1.15.4,io.jsonwebtoken:jjwt-api:0.12.5,io.jsonwebtoken:jjwt-impl:0.12.5,io.jsonwebtoken:jjwt-jackson:0.12.5,org.apache.pdfbox:pdfbox:3.0.2,com.mysql:mysql-connector-j:8.0.35
+2026-03-29T05:39:31.957Z [INFO] getting CVEs for dependencies:
+ - com.azure:azure-security-keyvault-secrets:4.9.3
+  - com.azure:azure-identity:1.15.4
+  - io.jsonwebtoken:jjwt-api:0.12.5
+  - io.jsonwebtoken:jjwt-impl:0.12.5
+  - io.jsonwebtoken:jjwt-jackson:0.12.5
+  - org.apache.pdfbox:pdfbox:3.0.2
+  - com.mysql:mysql-connector-j:8.0.35...
+2026-03-29T05:39:31.957Z [INFO] getting gitHub access token...
+2026-03-29T05:39:31.961Z [INFO] Processing batch 1/1, size: 7
+2026-03-29T05:39:31.962Z [INFO] Proxy configuration: HTTPS_PROXY=(not set), HTTP_PROXY=(not set), NO_PROXY=(not set), NODE_EXTRA_CA_CERTS=(not set), vscode http.proxy=(not set), hasProxy=false
+2026-03-29T05:39:31.962Z [INFO] No proxy detected, using direct connection.
+2026-03-29T05:39:31.964Z [INFO] listing CVEs from GitHub for dependencies [
+  "com.azure:azure-security-keyvault-secrets:4.9.3",
+  "com.azure:azure-identity:1.15.4",
+  "io.jsonwebtoken:jjwt-api:0.12.5",
+  "io.jsonwebtoken:jjwt-impl:0.12.5",
+  "io.jsonwebtoken:jjwt-jackson:0.12.5",
+  "org.apache.pdfbox:pdfbox:3.0.2",
+  "com.mysql:mysql-connector-j:8.0.35"
+]
+2026-03-29T05:39:32.409Z [INFO] Fetched 2 total advisories across all pages
+2026-03-29T05:39:32.410Z [INFO] grouping CVEs and finding max patched version by dep...
+2026-03-29T05:39:32.410Z [INFO] done getting 1 CVEs for 7 dependencies
+2026-03-29T05:39:32.410Z [INFO] calculating patched version by dep...
+2026-03-29T05:39:32.430Z [INFO] CVE CVE-2023-22102 for com.mysql:mysql-connector-j:8.0.35: patched version 8.2.0
+2026-03-29T05:39:32.431Z [INFO] finished getting CVEs for dependencies.
+2026-03-29T05:39:32.432Z [INFO] Found 1 dependencies with known CVEs
+2026-03-29T05:39:32.434Z [INFO] CVE issues found:
+- Dependency `com.mysql:mysql-connector-j:8.0.35` has **1** known CVEs need to be fixed:
+  - [CVE-2023-22102](https://github.com/advisories/GHSA-m6vm-37g8-gqvh): MySQL Connectors takeover vulnerability
+    - **Severity**: **HIGH**
+    - **Details**: Vulnerability in the MySQL Connectors product of Oracle MySQL (component: Connector/J). Supported versions that are affected are 8.1.0 and prior. Difficult to exploit vulnerability allows unauthenticated attacker with network access via multiple protocols to compromise MySQL Connectors. Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in MySQL Connectors, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of MySQL Connectors.
+2026-03-29T05:39:32.435Z [INFO] [Tool.invoke]({result: {
+  "message": "The following dependencies have known CVEs that need to be fixed:\n- Dependency `com.mysql:mysql-connector-j:8.0.35` has **1** known CVEs need to be fixed:\n  - [CVE-2023-22102](https://github.com/advisories/GHSA-m6vm-37g8-gqvh): MySQL Connectors takeover vulnerability\n    - **Severity**: **HIGH**\n    - **Details**: Vulnerability in the MySQL Connectors product of Oracle MySQL (component: Connector/J). Supported versions that are affected are 8.1.0 and prior. Difficult to exploit vulnerability allows unauthenticated attacker with network access via multiple protocols to compromise MySQL Connectors. Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in MySQL Connectors, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of MySQL Connectors.",
+  "result": [
+    {
+      "cves": [
+        {
+          "id": "CVE-2023-22102",
+          "ghsa_id": "GHSA-m6vm-37g8-gqvh",
+          "severity": "high",
+          "summary": "MySQL Connectors takeover vulnerability",
+          "description": "Vulnerability in the MySQL Connectors product of Oracle MySQL (component: Connector/J). Supported versions that are affected are 8.1.0 and prior. Difficult to exploit vulnerability allows unauthenticated attacker with network access via multiple protocols to compromise MySQL Connectors. Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in MySQL Connectors, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of MySQL Connectors.",
+          "html_url": "https://github.com/advisories/GHSA-m6vm-37g8-gqvh",
+          "affectedDeps": [
+            {
+              "name": "com.mysql:mysql-connector-j",
+              "vulVersions": "< 8.2.0",
+              "patchedVersion": "8.2.0"
+            },
+            {
+              "name": "mysql:mysql-connector-java",
+              "vulVersions": "<= 8.0.33",
+              "patchedVersion": null
+            }
+          ]
+        }
+      ],
+      "dep": "com.mysql:mysql-connector-j:8.0.35",
+      "name": "com.mysql:mysql-connector-j",
+      "version": "8.0.35",
+      "semver": "8.0.35",
+      "unfixableCves": [],
+      "patchedVersion": "8.2.0"
+    }
+  ],
+  "telemetry": {
+    "cve.high": 1,
+    "cves": "{\"CVE-2023-22102\":1}"
+  }
+}}).
+2026-03-29T05:39:32.436Z [INFO] ----------------------invoked appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:40.584Z [INFO] ---------------------prepare appmod-build-java-project----------------------
+2026-03-29T05:39:40.585Z [INFO] [Tool.prepareInvocation]({name: appmod-build-java-project, input: {
+  "buildToolPath": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "jdkPath": "C:\\Program Files\\Java\\jdk-25",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:40.586Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-29T05:39:40.587Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Build project"
+}}).
+2026-03-29T05:39:40.587Z [INFO] ----------------------prepared appmod-build-java-project----------------------
+2026-03-29T05:39:40.591Z [INFO] ----------------------invoke appmod-build-java-project----------------------
+2026-03-29T05:39:40.592Z [INFO] [Tool.invoke]({name: appmod-build-java-project, input: {
+  "buildToolPath": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "jdkPath": "C:\\Program Files\\Java\\jdk-25",
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:40.592Z [INFO] [Tool.invoke] do invoke.
+2026-03-29T05:39:40.593Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-29T05:39:40.595Z [INFO] Project java version: 25
+2026-03-29T05:39:40.596Z [INFO] Build tool type detected from path: mvn
+2026-03-29T05:39:40.597Z [INFO] Build tool type: mvn
+2026-03-29T05:39:40.597Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-29T05:39:40.598Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": ""
+}
+2026-03-29T05:39:40.599Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": ""
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-29T05:39:40.600Z [INFO] [MavenBuildTool] Getting build errors of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:40.600Z [INFO] [Environment] Running command (Java undefined): mvn clean test-compile -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.630Z [WARN] Initial mvn clean compile failed, attempting mvn clean install to fix dependency errors.
+2026-03-29T05:39:40.630Z [INFO] [MavenBuildTool] Getting build errors of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:40.631Z [INFO] [Environment] Running command (Java undefined): mvn clean install -DskipTests -Dgpg.skip -Ddockerfile.skip -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.664Z [INFO] [Environment] Running command (Java undefined): mvn clean test-compile -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.699Z [INFO] [MavenBuildTool] parsing compilation errors.
+2026-03-29T05:39:40.700Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:40.701Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:40.702Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-2595aeab-9187-41b7-b074-a607fa36b909.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.748Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-2595aeab-9187-41b7-b074-a607fa36b909.log'
+2026-03-29T05:39:40.749Z [INFO] [BaseBuildTool] Found 0 modules: 
+2026-03-29T05:39:40.749Z [INFO] [BaseBuildTool] Finish counting Java and class files
+2026-03-29T05:39:40.750Z [INFO] [MavenBuildTool] Cleaning c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system using Maven
+2026-03-29T05:39:40.750Z [INFO] [Environment] Running command (Java undefined): mvn clean -q -B -fn
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.779Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:40.780Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:40.780Z [INFO] Build succeeded! There are no build errors in the project.
+2026-03-29T05:39:40.781Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-b7103d55-d0d2-4b6b-9567-453b8123f1a6.log
+2026-03-29T05:39:40.796Z [INFO] [Tool.invoke]({result: {
+  "message": "Build succeeded! There are no build errors in the project.",
+  "result": {
+    "numOfJavaFiles": 0,
+    "numOfClassFiles": 0,
+    "errors": [],
+    "command": "mvn clean test-compile -q -B -fn"
+  },
+  "telemetry": {
+    "result": "succeeded"
+  }
+}}).
+2026-03-29T05:39:40.796Z [INFO] ----------------------invoked appmod-build-java-project----------------------
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:40.841Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-b7103d55-d0d2-4b6b-9567-453b8123f1a6.log'
+2026-03-29T05:39:50.084Z [INFO] ---------------------prepare appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:50.084Z [INFO] [Tool.prepareInvocation]({name: appmod-validate-cves-for-java, input: {
+  "dependencies": [
+    "com.azure:azure-security-keyvault-secrets:4.9.3",
+    "com.azure:azure-identity:1.15.4",
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.2.0"
+  ],
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:50.085Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-29T05:39:50.086Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Validate CVEs"
+}}).
+2026-03-29T05:39:50.087Z [INFO] ----------------------prepared appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:50.092Z [INFO] ----------------------invoke appmod-validate-cves-for-java----------------------
+2026-03-29T05:39:50.092Z [INFO] [Tool.invoke]({name: appmod-validate-cves-for-java, input: {
+  "dependencies": [
+    "com.azure:azure-security-keyvault-secrets:4.9.3",
+    "com.azure:azure-identity:1.15.4",
+    "io.jsonwebtoken:jjwt-api:0.12.5",
+    "io.jsonwebtoken:jjwt-impl:0.12.5",
+    "io.jsonwebtoken:jjwt-jackson:0.12.5",
+    "org.apache.pdfbox:pdfbox:3.0.2",
+    "com.mysql:mysql-connector-j:8.2.0"
+  ],
+  "projectPath": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system",
+  "sessionId": "20260329110402"
+}}).
+2026-03-29T05:39:50.093Z [INFO] [Tool.invoke] do invoke.
+2026-03-29T05:39:50.093Z [INFO] Project c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system is a maven project, try to get java version from pom.xml
+2026-03-29T05:39:50.094Z [INFO] Project java version: 25
+2026-03-29T05:39:50.095Z [INFO] Maven project detected.
+2026-03-29T05:39:50.095Z [INFO] Build tool type: mvn
+2026-03-29T05:39:50.185Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+  "version": "25"
+}
+2026-03-29T05:39:50.198Z [INFO] Build tool: {
+  "name": "mvn",
+  "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+  "version": "",
+  "source": "install"
+}
+2026-03-29T05:39:50.198Z [INFO] Project config: {
+  "buildTool": {
+    "path": "C:\\Users\\prabhat\\.maven\\maven-3.9.14\\bin",
+    "name": "mvn",
+    "version": "",
+    "source": "install"
+  },
+  "jdk": {
+    "path": "C:\\Program Files\\Java\\jdk-25\\bin",
+    "name": "java",
+    "version": "25"
+  },
+  "name": "online-quiz-exam-system",
+  "dir": "c:\\Users\\prabhat\\OneDrive\\Desktop\\mini project\\online-quiz-exam-system"
+}
+2026-03-29T05:39:50.199Z [INFO] [Environment] Running command (Java undefined): mvn dependency:tree -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.231Z [ERROR] [MavenBuildTool] Failed to get dependencies from dependency tree: Error: Failed to run command: "mvn dependency:tree -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.232Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -B
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.270Z [ERROR] [MavenBuildTool] Failed to get dependencies from effective pom: Error: Failed to run command: "mvn help:effective-pom -B" with error code 1
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.272Z [INFO] [MavenBuildTool] Getting Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system from pom.xml
+2026-03-29T05:39:50.273Z [INFO] [MavenBuildTool] Searching for pom.xml files in c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.274Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.275Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.276Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-7d9cea2d-c0de-4139-9b65-525f501f4f01.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.329Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-7d9cea2d-c0de-4139-9b65-525f501f4f01.log'
+2026-03-29T05:39:50.329Z [INFO] [MavenBuildTool] Found pom.xml files: 
+2026-03-29T05:39:50.330Z [INFO] [Environment] Running command (Java undefined): mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.369Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -DforceStdout
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.406Z [ERROR] [MavenBuildTool] Failed to get Java version of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.464Z [INFO] [MavenBuildTool] Getting all module coordinates of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.465Z [INFO] [MavenBuildTool] Getting effective POMs of c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system
+2026-03-29T05:39:50.467Z [INFO] [Environment] Running command (Java undefined): mvn help:effective-pom -Doutput=effective-pom-a62e784b-9582-49f0-8f2b-3053ce3f1c15.log
+'mvn' is not recognized as an internal or external command,
+operable program or batch file.
+2026-03-29T05:39:50.505Z [INFO] [MavenBuildTool] Failed to get effective POMs: Error: ENOENT: no such file or directory, open 'c:\Users\prabhat\OneDrive\Desktop\mini project\online-quiz-exam-system\effective-pom-a62e784b-9582-49f0-8f2b-3053ce3f1c15.log'
+2026-03-29T05:39:50.506Z [INFO] Getting CVEs for dependencies: com.azure:azure-security-keyvault-secrets:4.9.3,com.azure:azure-identity:1.15.4,io.jsonwebtoken:jjwt-api:0.12.5,io.jsonwebtoken:jjwt-impl:0.12.5,io.jsonwebtoken:jjwt-jackson:0.12.5,org.apache.pdfbox:pdfbox:3.0.2,com.mysql:mysql-connector-j:8.2.0
+2026-03-29T05:39:50.507Z [INFO] getting CVEs for dependencies:
+ - com.azure:azure-security-keyvault-secrets:4.9.3
+  - com.azure:azure-identity:1.15.4
+  - io.jsonwebtoken:jjwt-api:0.12.5
+  - io.jsonwebtoken:jjwt-impl:0.12.5
+  - io.jsonwebtoken:jjwt-jackson:0.12.5
+  - org.apache.pdfbox:pdfbox:3.0.2
+  - com.mysql:mysql-connector-j:8.2.0...
+2026-03-29T05:39:50.507Z [INFO] getting gitHub access token...
+2026-03-29T05:39:50.509Z [INFO] Processing batch 1/1, size: 7
+2026-03-29T05:39:50.510Z [INFO] Proxy configuration: HTTPS_PROXY=(not set), HTTP_PROXY=(not set), NO_PROXY=(not set), NODE_EXTRA_CA_CERTS=(not set), vscode http.proxy=(not set), hasProxy=false
+2026-03-29T05:39:50.510Z [INFO] No proxy detected, using direct connection.
+2026-03-29T05:39:50.511Z [INFO] listing CVEs from GitHub for dependencies [
+  "com.azure:azure-security-keyvault-secrets:4.9.3",
+  "com.azure:azure-identity:1.15.4",
+  "io.jsonwebtoken:jjwt-api:0.12.5",
+  "io.jsonwebtoken:jjwt-impl:0.12.5",
+  "io.jsonwebtoken:jjwt-jackson:0.12.5",
+  "org.apache.pdfbox:pdfbox:3.0.2",
+  "com.mysql:mysql-connector-j:8.2.0"
+]
+2026-03-29T05:39:51.010Z [INFO] Fetched 1 total advisories across all pages
+2026-03-29T05:39:51.011Z [INFO] grouping CVEs and finding max patched version by dep...
+2026-03-29T05:39:51.011Z [INFO] done getting 0 CVEs for 7 dependencies
+2026-03-29T05:39:51.012Z [INFO] calculating patched version by dep...
+2026-03-29T05:39:51.013Z [INFO] finished getting CVEs for dependencies.
+2026-03-29T05:39:51.013Z [INFO] Found 0 dependencies with known CVEs
+2026-03-29T05:39:51.014Z [INFO] No known CVEs that need to be fixed are found for dependencies: com.azure:azure-security-keyvault-secrets:4.9.3,com.azure:azure-identity:1.15.4,io.jsonwebtoken:jjwt-api:0.12.5,io.jsonwebtoken:jjwt-impl:0.12.5,io.jsonwebtoken:jjwt-jackson:0.12.5,org.apache.pdfbox:pdfbox:3.0.2,com.mysql:mysql-connector-j:8.2.0
+2026-03-29T05:39:51.014Z [INFO] [Tool.invoke]({result: {
+  "message": "No known CVEs that need to be fixed are found for the given dependencies."
+}}).
+2026-03-29T05:39:51.015Z [INFO] ----------------------invoked appmod-validate-cves-for-java----------------------

@@ -1,0 +1,153 @@
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.4rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.createBtn {
+  border: none;
+  color: #fff;
+  padding: 0.56rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.successMsg {
+  background: rgba(16, 185, 129, 0.14);
+  color: #86efac;
+  border: 1px solid rgba(16, 185, 129, 0.42);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.83rem;
+}
+
+.toolbar {
+  margin-bottom: 0.8rem;
+}
+
+.search {
+  max-width: 360px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.tableWrap {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: rgba(15, 23, 42, 0.84);
+  padding: 0.8rem 0.9rem;
+  text-align: left;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.table td {
+  padding: 0.82rem 0.9rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.table tr:hover td {
+  background: rgba(108, 99, 255, 0.08);
+}
+
+.empty {
+  padding: 1.6rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.field input {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.55);
+  color: #c4bfff;
+  padding: 0.53rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.submitBtn {
+  border: none;
+  color: #fff;
+  padding: 0.53rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 1.1rem 0.9rem 1.3rem;
+  }
+}

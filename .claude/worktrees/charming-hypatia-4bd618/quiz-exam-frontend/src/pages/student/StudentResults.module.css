@@ -1,0 +1,259 @@
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.4rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.exportBtn,
+.shareBtn {
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.exportBtn {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.shareBtn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.notice {
+  margin-bottom: 0.9rem;
+  color: #86efac;
+  font-size: 0.84rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+  gap: 0.9rem;
+}
+
+.resultCard {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.resultCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.resultCard.active {
+  border-color: rgba(108, 99, 255, 0.6);
+}
+
+.resultTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.examName {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.65rem;
+}
+
+.scoreCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary) calc(var(--pct) * 1%), rgba(148, 163, 184, 0.2) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--text);
+  position: relative;
+}
+
+.scoreCircle::before {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+.scoreCircle span {
+  position: relative;
+  z-index: 1;
+}
+
+.scoreDetails p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-light);
+}
+
+.pctBar {
+  height: 7px;
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+
+.pctFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.reviewBtn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.55);
+  color: #c4bfff;
+  padding: 0.38rem 0.82rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.reviewBtn:hover {
+  background: rgba(108, 99, 255, 0.16);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.detailScore {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.detailPct {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.detailActions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.breakdownTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.qItem {
+  padding: 0.85rem;
+  border-radius: 10px;
+  border-left: 3px solid transparent;
+}
+
+.qItem.correct {
+  background: rgba(16, 185, 129, 0.12);
+  border-left-color: rgba(16, 185, 129, 0.6);
+}
+
+.qItem.wrong {
+  background: rgba(239, 68, 68, 0.12);
+  border-left-color: rgba(239, 68, 68, 0.6);
+}
+
+.qHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.4rem;
+}
+
+.qNum {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.qResult {
+  font-size: 0.82rem;
+  margin-left: auto;
+  font-weight: 700;
+}
+
+.answer {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin: 0.2rem 0 0;
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 1.1rem 0.9rem 1.3rem;
+  }
+}
