@@ -128,68 +128,35 @@ public class AiQuestionGeneratorService {
     }
 
     private String buildPrompt(String text, int count, String difficulty) {
-        return "You are an expert professor with 10 years of experience creating\n" +
-               "high quality university exam questions.\n\n" +
-               "Your task is to generate " + count + " MCQ questions on the subject\n" +
-               "of OPERATING SYSTEMS based on the concepts found in the\n" +
-               "provided study material.\n\n" +
-               "QUESTION QUALITY RULES:\n" +
-               "- Every question must be grammatically correct and complete\n" +
-               "- Questions must be clear, concise and unambiguous\n" +
-               "- Each question must test ONE specific concept\n" +
-               "- Never copy raw sentences from the document as question text\n" +
-               "- Identify the KEY CONCEPTS from the document and frame\n" +
-               "  proper questions around those concepts\n" +
-               "- Options must be meaningful and plausible, not random text\n" +
-               "- Only ONE option should be clearly correct\n" +
-               "- Wrong options should be related but clearly incorrect\n" +
-               "- Each option must be SHORT — maximum 15 words only\n" +
-               "- NEVER paste raw document text or syllabus content as an option\n" +
-               "- NEVER use long sentences copied from the document as options\n\n" +
-               "QUESTION FORMAT VARIETY (rotate between these):\n" +
-               "1. Definition: 'What is [concept]?'\n" +
-               "2. Purpose: 'What is the purpose of [concept]?'\n" +
-               "3. Example: 'Which of the following is an example of [concept]?'\n" +
-               "4. Identify: 'Which of the following is NOT a type of [concept]?'\n" +
-               "5. Compare: 'What is the key difference between [A] and [B]?'\n" +
-               "6. Function: 'Which component of OS is responsible for [task]?'\n" +
-               "7. Scenario: 'In which situation would [concept] be used?'\n\n" +
-               "STRICTLY FORBIDDEN:\n" +
-               "- Do not copy sentences from document as question text\n" +
-               "- Do not use partial sentences as question subjects\n" +
-               "- Do not ask 'according to the document'\n" +
-               "- Do not include professor names, page numbers, course codes\n" +
-               "- Do not create questions with grammatically incorrect text\n" +
-               "- Do not create questions where the answer is obvious from\n" +
-               "  the question itself\n\n" +
-               "EXAMPLE OF GOOD QUESTIONS:\n" +
-               "Q: What is the primary function of an Operating System?\n" +
-               "A: Resource management and providing interface between user and hardware\n" +
-               "B: Only managing files on disk\n" +
-               "C: Running application software directly\n" +
-               "D: Managing internet connections only\n" +
-               "Correct: A\n\n" +
-               "Q: Which scheduling algorithm provides the minimum average\n" +
-               "waiting time?\n" +
-               "A: FCFS\n" +
-               "B: Round Robin\n" +
-               "C: Shortest Job First\n" +
-               "D: Priority Scheduling\n" +
-               "Correct: C\n\n" +
-               "Study material content:\n" +
-               text + "\n\n" +
-               "IMPORTANT: Return ONLY valid JSON array, no extra text:\n" +
+        String subject = inferSubject(text);
+        String difficultyInstruction = "MIXED".equals(difficulty)
+            ? "Vary difficulty: roughly one-third EASY, one-third MEDIUM, one-third HARD."
+            : "All questions must be " + difficulty + " difficulty.";
+        return "You are an expert professor creating university exam questions.\n\n" +
+               "Generate exactly " + count + " MCQ questions based ONLY on the study material below.\n" +
+               "Subject area inferred from the document: " + subject + "\n\n" +
+               "RULES:\n" +
+               "- Questions must be about concepts found in the study material — not generic knowledge\n" +
+               "- Each question must be grammatically correct and test ONE specific concept\n" +
+               "- Do NOT copy sentences from the document as question text\n" +
+               "- Options must be short (max 15 words), meaningful, and plausible\n" +
+               "- Only ONE option is correct; wrong options should be clearly incorrect but related\n" +
+               "- Do NOT mention 'the document', page numbers, professor names, or course codes\n" +
+               difficultyInstruction + "\n\n" +
+               "Study material:\n" +
+               text.substring(0, Math.min(text.length(), 6000)) + "\n\n" +
+               "Return ONLY a valid JSON array with no extra text, markdown, or code fences:\n" +
                "[\n" +
                "  {\n" +
-               "    'question': 'clear grammatically correct question',\n" +
-               "    'optionA': 'meaningful option',\n" +
-               "    'optionB': 'meaningful option',\n" +
-               "    'optionC': 'meaningful option',\n" +
-               "    'optionD': 'meaningful option',\n" +
-               "    'correctAnswer': 'A or B or C or D',\n" +
-               "    'difficulty': 'EASY or MEDIUM or HARD',\n" +
-               "    'topic': 'specific OS concept name',\n" +
-               "    'explanation': 'clear explanation of why this answer is correct'\n" +
+               "    \"question\": \"clear grammatically correct question about the material\",\n" +
+               "    \"optionA\": \"plausible option\",\n" +
+               "    \"optionB\": \"plausible option\",\n" +
+               "    \"optionC\": \"plausible option\",\n" +
+               "    \"optionD\": \"plausible option\",\n" +
+               "    \"correctAnswer\": \"A\",\n" +
+               "    \"difficulty\": \"EASY\",\n" +
+               "    \"topic\": \"specific concept from the material\",\n" +
+               "    \"explanation\": \"why this answer is correct\"\n" +
                "  }\n" +
                "]";
     }
