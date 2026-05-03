@@ -1,10 +1,13 @@
 package com.quizexam.controller;
 
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 import com.quizexam.model.Role;
 import com.quizexam.model.User;
 import com.quizexam.repository.UserRepository;
 import com.quizexam.security.JwtUtils;
 import com.quizexam.security.LoginRateLimiter;
+import com.quizexam.service.FirebaseAuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -20,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -30,15 +34,18 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoginRateLimiter loginRateLimiter;
+    private final FirebaseAuthService firebaseAuthService;
 
     public AuthController(AuthenticationManager authManager, JwtUtils jwtUtils,
                           UserRepository userRepository, PasswordEncoder passwordEncoder,
-                          LoginRateLimiter loginRateLimiter) {
+                          LoginRateLimiter loginRateLimiter,
+                          FirebaseAuthService firebaseAuthService) {
         this.authManager = authManager;
         this.jwtUtils = jwtUtils;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loginRateLimiter = loginRateLimiter;
+        this.firebaseAuthService = firebaseAuthService;
     }
 
     @PostMapping("/login")
@@ -82,6 +89,74 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "Registration successful"));
     }
+
+    /**
+     * Firebase login: the frontend sends a Firebase ID token; we verify it,
+     * find-or-create a local user, and return our own JWT so the rest of the
+     * app works exactly as before.
+     */
+    @PostMapping("/firebase-login")
+    public ResponseEntity<?> firebaseLogin(@RequestBody FirebaseLoginRequest req) {
+        if (req.idToken() == null || req.idToken().isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Missing Firebase ID token"));
+        }
+
+        FirebaseToken decoded;
+        try {
+            decoded = firebaseAuthService.verifyIdToken(req.idToken());
+        } catch (FirebaseAuthException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "Invalid or expired Firebase token"));
+        } catch (IllegalStateException e) {
+            // Firebase Admin SDK was not initialised (missing service-account file)
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(Map.of("error", "Firebase authentication is not configured on the server. " +
+                             "Please add firebase-service-account.json to the backend resources folder."));
+        }
+
+        // ── Resolve email ─────────────────────────────────────────────────────
+        String email = decoded.getEmail();
+        if (email == null || email.isBlank()) {
+            // Phone-auth users have no email — synthesise a stable placeholder
+            email = "phone_" + decoded.getUid() + "@firebase.quizmaster.local";
+        }
+
+        // ── Find or create local user ─────────────────────────────────────────
+        final String resolvedEmail = email;
+        User user = userRepository.findByEmail(resolvedEmail).orElseGet(() -> {
+            // Derive a username: prefer display name, then email prefix, then UID prefix
+            String displayName = decoded.getName();
+            String base = (displayName != null && !displayName.isBlank())
+                ? displayName.toLowerCase().replaceAll("[^a-z0-9]", "_")
+                : resolvedEmail.contains("@") ? resolvedEmail.split("@")[0] : decoded.getUid().substring(0, 8);
+
+            // Ensure username is unique
+            String username = base;
+            int suffix = 2;
+            while (userRepository.existsByUsername(username)) {
+                username = base + "_" + suffix++;
+            }
+
+            User newUser = new User();
+            newUser.setUsername(username);
+            newUser.setEmail(resolvedEmail);
+            // Firebase-authed users don't need a local password — set a random one
+            newUser.setPasswordHash(passwordEncoder.encode(UUID.randomUUID().toString()));
+            newUser.setRole(Role.STUDENT);   // default role; admins can promote later
+            return userRepository.save(newUser);
+        });
+
+        String token = jwtUtils.generateToken(user.getUsername());
+        return ResponseEntity.ok(Map.of(
+            "token",    token,
+            "userId",   user.getId(),
+            "username", user.getUsername(),
+            "role",     user.getRole().name(),
+            "email",    user.getEmail()
+        ));
+    }
+
+    public record FirebaseLoginRequest(String idToken) {}
 
     public record LoginRequest(@NotBlank String username, @NotBlank String password) {}
     public record RegisterRequest(

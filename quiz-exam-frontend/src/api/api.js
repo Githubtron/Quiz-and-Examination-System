@@ -68,6 +68,8 @@ export const auth = {
   login: (username, password) => request('POST', '/api/auth/login', { username, password }),
   register: (username, email, password, role) =>
     request('POST', '/api/auth/register', { username, email, password, role }),
+  // Exchange a Firebase ID token for a backend JWT
+  firebaseLogin: (idToken) => request('POST', '/api/auth/firebase-login', { idToken }),
 }
 
 // ── Users ─────────────────────────────────────────────────────────────────────

@@ -1,4 +1,9 @@
-.env 
-application.properties 
-target/ 
-node_modules/ 
+.env
+application.properties
+target/
+node_modules/
+
+# Firebase secrets — never commit these
+firebase-service-account.json
+.env.local
+

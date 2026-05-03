@@ -9,13 +9,22 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null
   })
 
-  const login = useCallback(async (username, password) => {
-    const data = await authApi.login(username, password)
-    // data: { token, userId, username, role, email }
+  const persist = (data) => {
     const s = { token: data.token, userId: data.userId, username: data.username, role: data.role, email: data.email }
     setSession(s)
     localStorage.setItem('qm_session', JSON.stringify(s))
     return s
+  }
+
+  const login = useCallback(async (username, password) => {
+    const data = await authApi.login(username, password)
+    return persist(data)
+  }, [])
+
+  // Firebase auth: exchange Firebase ID token for a backend JWT
+  const firebaseLogin = useCallback(async (idToken) => {
+    const data = await authApi.firebaseLogin(idToken)
+    return persist(data)
   }, [])
 
   const logout = useCallback(() => {
@@ -36,7 +45,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ session, login, logout, register, updateProfile }}>
+    <AuthContext.Provider value={{ session, login, firebaseLogin, logout, register, updateProfile }}>
       {children}
     </AuthContext.Provider>
   )

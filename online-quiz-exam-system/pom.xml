@@ -88,6 +88,13 @@
             <version>5.2.5</version>
         </dependency>
 
+        <!-- Firebase Admin SDK (verify Firebase ID tokens) -->
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.3.0</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
