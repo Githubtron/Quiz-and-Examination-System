@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd quiz-exam-frontend && npm install && npm run build",
+  "buildCommand": "cd quiz-exam-frontend && npm install && npx vite build",
   "outputDirectory": "quiz-exam-frontend/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
