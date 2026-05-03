@@ -3,6 +3,9 @@ package com.quizexam.controller;
 import com.quizexam.model.Role;
 import com.quizexam.model.User;
 import com.quizexam.repository.UserRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,14 +38,19 @@ public class UserController {
 
     /** Update current user profile */
     @PutMapping("/me")
-    public ResponseEntity<User> updateMe(@RequestBody Map<String, String> updates,
-                                         @AuthenticationPrincipal UserDetails principal) {
+    public ResponseEntity<?> updateMe(@Valid @RequestBody UpdateProfileRequest updates,
+                                      @AuthenticationPrincipal UserDetails principal) {
         User user = userRepository.findByUsername(principal.getUsername()).orElseThrow();
-        if (updates.containsKey("email")) user.setEmail(updates.get("email"));
-        if (updates.containsKey("password") && !updates.get("password").isBlank())
-            user.setPasswordHash(passwordEncoder.encode(updates.get("password")));
+        if (updates.email() != null && !updates.email().isBlank()) user.setEmail(updates.email());
+        if (updates.password() != null && !updates.password().isBlank())
+            user.setPasswordHash(passwordEncoder.encode(updates.password()));
         return ResponseEntity.ok(userRepository.save(user));
     }
+
+    public record UpdateProfileRequest(
+        @Email String email,
+        @Size(min = 8, message = "Password must be at least 8 characters") String password
+    ) {}
 
     /** Admin: list all users */
     @GetMapping

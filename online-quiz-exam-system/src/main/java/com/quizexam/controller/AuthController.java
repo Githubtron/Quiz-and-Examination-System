@@ -4,10 +4,13 @@ import com.quizexam.model.Role;
 import com.quizexam.model.User;
 import com.quizexam.repository.UserRepository;
 import com.quizexam.security.JwtUtils;
+import com.quizexam.security.LoginRateLimiter;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,17 +29,25 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LoginRateLimiter loginRateLimiter;
 
     public AuthController(AuthenticationManager authManager, JwtUtils jwtUtils,
-                          UserRepository userRepository, PasswordEncoder passwordEncoder) {
+                          UserRepository userRepository, PasswordEncoder passwordEncoder,
+                          LoginRateLimiter loginRateLimiter) {
         this.authManager = authManager;
         this.jwtUtils = jwtUtils;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loginRateLimiter = loginRateLimiter;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req, HttpServletRequest httpRequest) {
+        String clientIp = httpRequest.getRemoteAddr();
+        if (!loginRateLimiter.isAllowed(clientIp)) {
+            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(Map.of("error", "Too many login attempts. Please try again in 1 minute."));
+        }
         Authentication auth = authManager.authenticate(
             new UsernamePasswordAuthenticationToken(req.username(), req.password()));
         String token = jwtUtils.generateToken(((UserDetails) auth.getPrincipal()).getUsername());

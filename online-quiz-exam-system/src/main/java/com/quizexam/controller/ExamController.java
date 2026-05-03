@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,6 +163,19 @@ public class ExamController {
         String filename = file.getOriginalFilename() == null ? "document.pdf" : file.getOriginalFilename();
         if (!filename.toLowerCase(Locale.ROOT).endsWith(".pdf")) {
             return ResponseEntity.badRequest().body(Map.of("error", "Only PDF files are supported for this endpoint"));
+        }
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.equalsIgnoreCase("application/pdf")) {
+            return ResponseEntity.badRequest().body(Map.of("error", "File must be a PDF (invalid content type)"));
+        }
+        try (InputStream magicStream = file.getInputStream()) {
+            byte[] magic = new byte[4];
+            int read = magicStream.read(magic);
+            if (read < 4 || magic[0] != 0x25 || magic[1] != 0x50 || magic[2] != 0x44 || magic[3] != 0x46) {
+                return ResponseEntity.badRequest().body(Map.of("error", "File content is not a valid PDF"));
+            }
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Could not read file"));
         }
         if (duration < 1) {
             return ResponseEntity.badRequest().body(Map.of("error", "duration must be at least 1 minute"));

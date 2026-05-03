@@ -1,10 +1,7 @@
-/**
- * Central API client — all calls to the Spring Boot backend go through here.
- * Base URL: http://localhost:8080
- */
 import axios from 'axios'
 
-const BASE = 'http://localhost:8080'
+// Empty string uses Vite's /api proxy in dev; set VITE_API_BASE_URL for production
+const BASE = import.meta.env.VITE_API_BASE_URL || ''
 
 function getToken() {
   const s = localStorage.getItem('qm_session')
