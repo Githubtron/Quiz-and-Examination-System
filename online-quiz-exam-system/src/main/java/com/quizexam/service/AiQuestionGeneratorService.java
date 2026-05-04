@@ -95,7 +95,10 @@ public class AiQuestionGeneratorService {
                         failures.add(model + " attempt " + attempt + ": parse error - " + parseError.getMessage());
                     }
                 } else {
-                    failures.add(model + " attempt " + attempt + ": HTTP " + response.statusCode());
+                    String snippet = response.body() == null ? "" :
+                        response.body().substring(0, Math.min(response.body().length(), 200));
+                    failures.add(model + " attempt " + attempt + ": HTTP " + response.statusCode() + " — " + snippet);
+                    if (response.statusCode() == 401) break; // bad key — no point retrying same model
                 }
 
                 if (response.statusCode() == 429 || response.statusCode() >= 500) {
