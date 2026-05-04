@@ -188,23 +188,81 @@
   box-shadow: 0 16px 28px rgba(108, 99, 255, 0.4);
 }
 
-.demoLabel {
-  margin-top: 0.95rem;
-  font-size: 0.8rem;
-  text-align: center;
-  color: var(--text-muted);
+/* ── Demo Mode section ─────────────────────────────────────────────────────── */
+.demoSection {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(251, 191, 36, 0.45);
+  background: rgba(251, 191, 36, 0.06);
 }
 
-.demos {
-  display: none;
+.demoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.18);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.demoBadgeIcon {
+  font-size: 0.85rem;
+}
+
+.demoHint {
+  font-size: 0.78rem;
+  color: rgba(251, 191, 36, 0.65);
+  margin-bottom: 0.75rem;
+  line-height: 1.45;
 }
 
 .demoRow {
-  display: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
 }
 
 .demoBtn {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.62rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.demoBtn:hover:not(:disabled) {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.15);
+}
+
+.demoBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.demoBtnStudent {
+  /* student tint — slightly green-gold */
+}
+
+.demoBtnProfessor {
+  /* professor tint — slightly orange-gold */
 }
 
 .switchLink {

@@ -45,7 +45,7 @@ function GoogleIcon() {
 
 // ── component ─────────────────────────────────────────────────────────────────
 export default function LoginPage() {
-  const { firebaseLogin } = useAuth()
+  const { firebaseLogin, demoLogin } = useAuth()
   const navigate = useNavigate()
 
   const [tab, setTab]               = useState('email')   // 'email' | 'phone'
@@ -88,6 +88,12 @@ export default function LoginPage() {
       )
     }
     return recaptchaVerifierRef.current
+  }
+
+  // ── Demo login (presentation only — no Firebase / backend call) ───────────
+  const handleDemoLogin = (role) => {
+    const session = demoLogin(role)
+    redirect(session.role)
   }
 
   const redirect = (role) => {
@@ -429,6 +435,33 @@ export default function LoginPage() {
             </button>
           </form>
         )}
+
+        {/* ── Demo Mode ── */}
+        <div className={styles.demoSection}>
+          <div className={styles.demoBadge}>
+            <span className={styles.demoBadgeIcon}>🎬</span>
+            Demo Mode
+          </div>
+          <p className={styles.demoHint}>No account needed — instant access for presentations</p>
+          <div className={styles.demoRow}>
+            <button
+              type="button"
+              className={`${styles.demoBtn} ${styles.demoBtnStudent}`}
+              onClick={() => handleDemoLogin('STUDENT')}
+              disabled={loading}
+            >
+              🎓 Demo Student
+            </button>
+            <button
+              type="button"
+              className={`${styles.demoBtn} ${styles.demoBtnProfessor}`}
+              onClick={() => handleDemoLogin('PROFESSOR')}
+              disabled={loading}
+            >
+              📋 Demo Professor
+            </button>
+          </div>
+        </div>
 
         <p className={styles.switchLink}>
           Don't have an account? <Link to="/register">Create one</Link>
