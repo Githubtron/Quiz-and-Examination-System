@@ -3,7 +3,7 @@ import styles from './GenerateQuestions.module.css'
 import { useAuth } from '../../context/AuthContext'
 
 const DIFFICULTIES = ['EASY', 'MEDIUM', 'HARD']
-const BASE = 'http://localhost:8080'
+const BASE = ''
 
 async function callGenerateAPI(file, count, token) {
   const formData = new FormData()
