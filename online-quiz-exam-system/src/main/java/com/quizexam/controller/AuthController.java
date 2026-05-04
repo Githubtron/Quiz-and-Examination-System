@@ -156,6 +156,40 @@ public class AuthController {
         ));
     }
 
+    /**
+     * Demo login: returns a real JWT for a pre-seeded demo user based on role.
+     * No password required — intended for presentations / UI demos only.
+     * Both STUDENT ("alex_demo") and PROFESSOR ("dr_demo") are seeded by DataInitializer.
+     */
+    @PostMapping("/demo-login")
+    public ResponseEntity<?> demoLogin(@RequestBody DemoLoginRequest req) {
+        if (req.role() == null || req.role().isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Missing role"));
+        }
+        String username = switch (req.role().toUpperCase()) {
+            case "STUDENT"   -> "alex_demo";
+            case "PROFESSOR" -> "dr_demo";
+            default -> null;
+        };
+        if (username == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid demo role. Use STUDENT or PROFESSOR"));
+        }
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(Map.of("error", "Demo user not found. Backend may still be initialising — retry in a moment."));
+        }
+        String token = jwtUtils.generateToken(user.getUsername());
+        return ResponseEntity.ok(Map.of(
+            "token",    token,
+            "userId",   user.getId(),
+            "username", user.getUsername(),
+            "role",     user.getRole().name(),
+            "email",    user.getEmail()
+        ));
+    }
+
+    public record DemoLoginRequest(String role) {}
     public record FirebaseLoginRequest(String idToken) {}
 
     public record LoginRequest(@NotBlank String username, @NotBlank String password) {}

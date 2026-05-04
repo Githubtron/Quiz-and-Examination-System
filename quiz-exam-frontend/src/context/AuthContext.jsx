@@ -27,25 +27,11 @@ export function AuthProvider({ children }) {
     return persist(data)
   }, [])
 
-  // Demo login: bypasses Firebase/backend entirely — for presentations only
-  const demoLogin = useCallback((role) => {
-    const demos = {
-      STUDENT: {
-        token:    'demo-token-student-abc123xyz',
-        userId:   'demo-student-001',
-        username: 'alex_demo',
-        role:     'STUDENT',
-        email:    'alex.student@demo.quizmaster.app',
-      },
-      PROFESSOR: {
-        token:    'demo-token-professor-xyz789abc',
-        userId:   'demo-professor-001',
-        username: 'dr_demo',
-        role:     'PROFESSOR',
-        email:    'dr.smith@demo.quizmaster.app',
-      },
-    }
-    return persist(demos[role])
+  // Demo login: calls /api/auth/demo-login to get a real backend JWT for a
+  // pre-seeded demo user. Fixes the 403 errors caused by the previous fake tokens.
+  const demoLogin = useCallback(async (role) => {
+    const data = await authApi.demoLogin(role)
+    return persist(data)
   }, [])
 
   const logout = useCallback(() => {

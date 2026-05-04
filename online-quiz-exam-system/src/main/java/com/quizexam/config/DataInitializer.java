@@ -21,9 +21,12 @@ public class DataInitializer {
 
     @EventListener(ApplicationReadyEvent.class)
     public void seedDemoUsers() {
-        seedUser("admin",       "admin@quizexam.com",   "admin123",        Role.ADMIN);
-        seedUser("prof_test",   "prof@quizexam.com",    "testprof12345",   Role.PROFESSOR);
-        seedUser("student_test","student@quizexam.com", "teststudent12345",Role.STUDENT);
+        seedUser("admin",       "admin@quizexam.com",           "admin123",        Role.ADMIN);
+        seedUser("prof_test",   "prof@quizexam.com",            "testprof12345",   Role.PROFESSOR);
+        seedUser("student_test","student@quizexam.com",         "teststudent12345",Role.STUDENT);
+        // Demo users for the frontend demoLogin() flow
+        seedUser("alex_demo",   "alex.student@demo.quizmaster.app", "demo-student-pwd", Role.STUDENT);
+        seedUser("dr_demo",     "dr.smith@demo.quizmaster.app",     "demo-prof-pwd",    Role.PROFESSOR);
     }
 
     private void seedUser(String username, String email, String password, Role role) {
