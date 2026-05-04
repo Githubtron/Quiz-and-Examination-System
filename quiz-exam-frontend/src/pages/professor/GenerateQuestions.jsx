@@ -3,7 +3,7 @@ import styles from './GenerateQuestions.module.css'
 import { useAuth } from '../../context/AuthContext'
 
 const DIFFICULTIES = ['EASY', 'MEDIUM', 'HARD']
-const BASE = ''
+const BASE = import.meta.env.VITE_API_BASE_URL || ''
 
 async function callGenerateAPI(file, count, token) {
   const formData = new FormData()
