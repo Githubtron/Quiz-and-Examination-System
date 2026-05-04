@@ -34,10 +34,16 @@ public class AiQuestionGeneratorService {
 
     private static final String OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
     private static final List<String> MODELS = List.of(
-        "meta-llama/llama-3.2-3b-instruct:free",
-        "google/gemma-3-4b-it:free",
-        "microsoft/phi-3-mini-128k-instruct:free"
+        "deepseek/deepseek-chat-v3-0324:free",
+        "google/gemma-3-27b-it:free",
+        "meta-llama/llama-3.3-70b-instruct:free"
     );
+    private static final String SYSTEM_MESSAGE =
+        "You are an expert educational assessment designer who creates university examination questions. " +
+        "Your MCQs always test genuine understanding of specific concepts — never trivial reading comprehension. " +
+        "Your distractors are plausible but unambiguously wrong to anyone who studied the material. " +
+        "You always respond with valid JSON that exactly matches the schema given by the user.";
+
     private static final List<String> CONCEPT_HINTS = List.of(
         "operating system", "process", "thread", "cpu scheduling", "context switch",
         "deadlock", "semaphore", "mutex", "memory management", "virtual memory",
@@ -93,24 +99,30 @@ public class AiQuestionGeneratorService {
                 }
 
                 if (response.statusCode() == 429 || response.statusCode() >= 500) {
-                    Thread.sleep(800L * attempt);
+                    Thread.sleep(attempt == 1 ? 3000L : 5000L);
                 } else {
                     break;
                 }
             }
         }
 
-        log.warn("OpenRouter generation unavailable. Using deterministic fallback. Failures: {}", failures);
-        return buildFallbackQuestions(documentText, count, normalizedDifficulty);
+        String failureSummary = String.join("; ", failures);
+        log.error("⚠️  AI question generation FAILED on all models. Failures: {}", failureSummary);
+        throw new IOException(
+            "AI question generation failed after trying all available models. " +
+            "This is usually caused by free-tier rate limits. Please wait a minute and try again. " +
+            "Details: " + failureSummary);
     }
 
     private HttpResponse<String> callOpenRouter(String model, String prompt) throws IOException, InterruptedException {
         Map<String, Object> body = Map.of(
             "model", model,
             "messages", List.of(
+                Map.of("role", "system", "content", SYSTEM_MESSAGE),
                 Map.of("role", "user", "content", prompt)
             ),
-            "temperature", 0.2,
+            "temperature", 0.4,
+            "top_p", 0.95,
             "max_tokens", 8192
         );
 
@@ -129,36 +141,53 @@ public class AiQuestionGeneratorService {
 
     private String buildPrompt(String text, int count, String difficulty) {
         String subject = inferSubject(text);
-        String difficultyInstruction = "MIXED".equals(difficulty)
-            ? "Vary difficulty: roughly one-third EASY, one-third MEDIUM, one-third HARD."
-            : "All questions must be " + difficulty + " difficulty.";
-        return "You are an expert professor creating university exam questions.\n\n" +
-               "Generate exactly " + count + " MCQ questions based ONLY on the study material below.\n" +
-               "Subject area inferred from the document: " + subject + "\n\n" +
-               "RULES:\n" +
-               "- Questions must be about concepts found in the study material — not generic knowledge\n" +
-               "- Each question must be grammatically correct and test ONE specific concept\n" +
-               "- Do NOT copy sentences from the document as question text\n" +
-               "- Options must be short (max 15 words), meaningful, and plausible\n" +
-               "- Only ONE option is correct; wrong options should be clearly incorrect but related\n" +
-               "- Do NOT mention 'the document', page numbers, professor names, or course codes\n" +
-               difficultyInstruction + "\n\n" +
-               "Study material:\n" +
-               text.substring(0, Math.min(text.length(), 6000)) + "\n\n" +
-               "Return ONLY a valid JSON array with no extra text, markdown, or code fences:\n" +
+        String difficultyGuide = switch (difficulty) {
+            case "EASY"   -> "All " + count + " questions must be EASY: test direct recall of a definition, term, or fact stated in the material.";
+            case "MEDIUM" -> "All " + count + " questions must be MEDIUM: test understanding of how or why a concept works, or the relationship between two concepts.";
+            case "HARD"   -> "All " + count + " questions must be HARD: require the student to apply, compare, or critically analyse concepts from the material.";
+            default       -> "Spread difficulty: roughly one-third EASY (recall), one-third MEDIUM (understanding), one-third HARD (application/analysis).";
+        };
+
+        String excerpt = text.length() > 9000 ? text.substring(0, 9000) : text;
+
+        return "Generate exactly " + count + " multiple-choice questions (MCQs) from the study material below.\n" +
+               "Subject: " + subject + "\n\n" +
+               "=== DIFFICULTY ===\n" +
+               difficultyGuide + "\n\n" +
+               "=== WHAT MAKES A GOOD MCQ ===\n" +
+               "QUESTION STEM:\n" +
+               "  - Tests ONE specific concept from the material (not general world knowledge)\n" +
+               "  - Is a complete, grammatically correct sentence or phrase\n" +
+               "  - Does NOT reveal or hint at the answer\n\n" +
+               "OPTIONS (A, B, C, D):\n" +
+               "  - Exactly one option is unambiguously correct\n" +
+               "  - All four options are from the same category (e.g. if the correct answer is an algorithm name, all options must be algorithm names)\n" +
+               "  - Wrong options are plausible but clearly incorrect to someone who studied the material\n" +
+               "  - Each option is concise (under 20 words)\n" +
+               "  - No option says 'All of the above', 'None of the above', 'Both A and B', or similar\n\n" +
+               "STRICTLY FORBIDDEN:\n" +
+               "  - Copying sentences verbatim from the material as options\n" +
+               "  - Questions answerable without reading the material\n" +
+               "  - Mentioning 'the document', 'the text', page numbers, instructor names, or course codes\n" +
+               "  - Two options that mean essentially the same thing\n" +
+               "  - Trick questions based on minor wording differences\n\n" +
+               "=== STUDY MATERIAL ===\n" +
+               excerpt + "\n\n" +
+               "=== OUTPUT FORMAT ===\n" +
+               "Return ONLY a raw JSON array — no markdown, no code fences, no text before or after the array:\n" +
                "[\n" +
                "  {\n" +
-               "    \"question\": \"clear grammatically correct question about the material\",\n" +
-               "    \"optionA\": \"plausible option\",\n" +
-               "    \"optionB\": \"plausible option\",\n" +
-               "    \"optionC\": \"plausible option\",\n" +
-               "    \"optionD\": \"plausible option\",\n" +
+               "    \"question\": \"<specific question about a concept in the material>\",\n" +
+               "    \"optionA\": \"<option>\",\n" +
+               "    \"optionB\": \"<option>\",\n" +
+               "    \"optionC\": \"<option>\",\n" +
+               "    \"optionD\": \"<option>\",\n" +
                "    \"correctAnswer\": \"A\",\n" +
                "    \"difficulty\": \"EASY\",\n" +
-               "    \"topic\": \"specific concept from the material\",\n" +
-               "    \"explanation\": \"why this answer is correct\"\n" +
+               "    \"topic\": \"<name of the concept being tested>\",\n" +
+               "    \"explanation\": \"<why the correct option is right and why each wrong option is wrong>\"\n" +
                "  }\n" +
-               "]";
+               "]\n";
     }
 
     private List<GeneratedQuestion> parseResponse(String responseBody, String defaultSubject, String requestedDifficulty) throws IOException {
@@ -169,14 +198,32 @@ public class AiQuestionGeneratorService {
         }
 
         String rawText = contentNode.asText().trim();
-        if (rawText.startsWith("```")) {
-            rawText = rawText.replaceAll("^```[a-zA-Z]*\\n?", "").replaceAll("```$", "").trim();
+
+        // Strip all markdown code fences
+        if (rawText.contains("```")) {
+            rawText = rawText.replaceAll("(?s)```(?:json)?\\s*", "").replaceAll("```", "").trim();
         }
+
+        // Extract the JSON array even if the model prepended or appended explanatory text
+        if (!rawText.startsWith("[")) {
+            int start = rawText.indexOf('[');
+            int end = rawText.lastIndexOf(']');
+            if (start >= 0 && end > start) {
+                rawText = rawText.substring(start, end + 1).trim();
+            }
+        }
+
         JsonNode parsed;
         try {
             parsed = mapper.readTree(rawText);
         } catch (IOException primaryParseError) {
-            parsed = mapper.readTree(rawText.replace('\'', '"'));
+            // Last-resort: fix common model quirk of using single quotes
+            try {
+                parsed = mapper.readTree(rawText.replace('\'', '"'));
+            } catch (IOException e) {
+                throw new IOException("Could not parse model output as JSON. Raw response (first 500 chars): " +
+                    rawText.substring(0, Math.min(rawText.length(), 500)));
+            }
         }
         if (!parsed.isArray()) {
             throw new IOException("Model output is not a JSON array");
@@ -222,6 +269,9 @@ public class AiQuestionGeneratorService {
     }
 
     private List<GeneratedQuestion> buildFallbackQuestions(String text, int count, String requestedDifficulty) {
+        log.warn("⚠️  FALLBACK TRIGGERED: AI question generation unavailable. " +
+                 "Returning deterministic template questions extracted from document text. " +
+                 "These are NOT AI-generated — they are pattern-based and lower quality.");
         List<String> facts = extractFacts(text);
         if (facts.isEmpty()) {
             throw new IllegalStateException("AI generation failed and fallback could not extract usable document facts");
@@ -321,10 +371,33 @@ public class AiQuestionGeneratorService {
     }
 
     private String inferSubject(String text) {
-        String lower = text.toLowerCase();
-        if (lower.contains("database") || lower.contains("sql")) return "Database Systems";
-        if (lower.contains("operating system") || lower.contains("kernel")) return "Operating Systems";
-        if (lower.contains("java") || lower.contains("jvm")) return "Java";
+        String lower = text.toLowerCase(Locale.ROOT);
+        // Computer Science & IT
+        if (lower.contains("machine learning") || lower.contains("neural network") || lower.contains("deep learning") || lower.contains("gradient descent")) return "Machine Learning";
+        if (lower.contains("artificial intelligence") || lower.contains("heuristic") || lower.contains("search algorithm") || lower.contains("knowledge representation")) return "Artificial Intelligence";
+        if (lower.contains("computer network") || lower.contains("tcp/ip") || lower.contains("osi model") || lower.contains("routing protocol") || lower.contains("subnet")) return "Computer Networks";
+        if (lower.contains("data structure") || lower.contains("linked list") || lower.contains("binary tree") || lower.contains("hash table") || lower.contains("graph traversal")) return "Data Structures & Algorithms";
+        if (lower.contains("database") || lower.contains("sql") || lower.contains("rdbms") || lower.contains("normalization") || lower.contains("relational")) return "Database Systems";
+        if (lower.contains("operating system") || lower.contains("kernel") || lower.contains("process scheduling") || lower.contains("deadlock") || lower.contains("semaphore")) return "Operating Systems";
+        if (lower.contains("compiler") || lower.contains("lexical analysis") || lower.contains("parsing") || lower.contains("grammar") || lower.contains("syntax tree")) return "Compiler Design";
+        if (lower.contains("software engineering") || lower.contains("sdlc") || lower.contains("agile") || lower.contains("scrum") || lower.contains("use case")) return "Software Engineering";
+        if (lower.contains("cryptography") || lower.contains("encryption") || lower.contains("cybersecurity") || lower.contains("firewall") || lower.contains("vulnerability")) return "Information Security";
+        if (lower.contains("cloud computing") || lower.contains("virtualization") || lower.contains("microservice") || lower.contains("containerization") || lower.contains("kubernetes")) return "Cloud Computing";
+        if (lower.contains("web") || lower.contains("html") || lower.contains("http") || lower.contains("css") || lower.contains("rest api")) return "Web Technology";
+        if (lower.contains("java") || lower.contains("jvm") || lower.contains("inheritance") || lower.contains("polymorphism") || lower.contains("encapsulation")) return "Object-Oriented Programming";
+        if (lower.contains("digital circuit") || lower.contains("logic gate") || lower.contains("boolean algebra") || lower.contains("flip flop") || lower.contains("multiplexer")) return "Digital Electronics";
+        if (lower.contains("computer architecture") || lower.contains("instruction set") || lower.contains("pipeline") || lower.contains("cache memory") || lower.contains("risc")) return "Computer Architecture";
+        // Mathematics
+        if (lower.contains("calculus") || lower.contains("differential equation") || lower.contains("integral") || lower.contains("derivative")) return "Calculus";
+        if (lower.contains("linear algebra") || lower.contains("matrix") || lower.contains("eigenvalue") || lower.contains("vector space")) return "Linear Algebra";
+        if (lower.contains("probability") || lower.contains("statistics") || lower.contains("distribution") || lower.contains("hypothesis")) return "Probability & Statistics";
+        if (lower.contains("discrete math") || lower.contains("set theory") || lower.contains("combinatorics") || lower.contains("graph theory")) return "Discrete Mathematics";
+        // Other subjects
+        if (lower.contains("economics") || lower.contains("demand") || lower.contains("supply curve") || lower.contains("gdp")) return "Economics";
+        if (lower.contains("management") || lower.contains("leadership") || lower.contains("organizational behavior") || lower.contains("strategy")) return "Management";
+        if (lower.contains("physics") || lower.contains("velocity") || lower.contains("acceleration") || lower.contains("thermodynamics")) return "Physics";
+        if (lower.contains("chemistry") || lower.contains("molecule") || lower.contains("periodic table") || lower.contains("reaction")) return "Chemistry";
+        if (lower.contains("biology") || lower.contains("cell") || lower.contains("dna") || lower.contains("evolution")) return "Biology";
         return "General";
     }
 

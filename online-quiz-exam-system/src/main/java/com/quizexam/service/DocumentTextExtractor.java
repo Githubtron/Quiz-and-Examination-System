@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,6 +77,7 @@ public class DocumentTextExtractor {
     private String cleanForAi(String rawText) {
         String[] lines = rawText.split("\\R+");
         List<String> cleaned = new ArrayList<>();
+        Set<String> seen = new LinkedHashSet<>(); // deduplicate repeated headers/footers
         int skipFollowingMetadataLines = 0;
 
         for (String line : lines) {
@@ -92,7 +95,11 @@ public class DocumentTextExtractor {
             }
 
             if (isMetadataLine(normalized)) continue;
-            if (normalized.length() < 50) continue;
+            if (normalized.length() < 20) continue;
+
+            // Skip exact duplicates (repeated running headers/footers in PDFs)
+            String key = normalized.toLowerCase(Locale.ROOT);
+            if (!seen.add(key)) continue;
 
             cleaned.add(normalized);
         }
