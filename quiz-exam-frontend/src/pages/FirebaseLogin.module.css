@@ -103,6 +103,45 @@
   text-align: center;
 }
 
+/* ── Forgot Password link ──────────────────────────────────────────────────── */
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.25rem;
+}
+
+.forgotLink {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary-light);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgotLink:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ── Forgot Password form header ───────────────────────────────────────────── */
+.forgotTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.forgotHint {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
 /* ── Resend button ─────────────────────────────────────────────────────────── */
 .resendBtn {
   display: flex;

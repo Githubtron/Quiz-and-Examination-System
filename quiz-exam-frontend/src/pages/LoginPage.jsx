@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   RecaptchaVerifier,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebaseAuth, googleProvider } from '../firebase'
 import styles from './AuthPage.module.css'
@@ -25,6 +26,8 @@ function firebaseMsg(code) {
     'auth/invalid-verification-code': 'Incorrect OTP code.',
     'auth/popup-closed-by-user':      'Sign-in was cancelled.',
     'auth/network-request-failed':    'Network error — check your connection.',
+    'auth/invalid-email':             'Please enter a valid email address.',
+    'auth/missing-email':             'Please enter an email address.',
   }
   return map[code] || null
 }
@@ -54,6 +57,13 @@ export default function LoginPage() {
   const [confirmResult, setConfirmResult] = useState(null)
   const [error, setError]           = useState('')
   const [loading, setLoading]       = useState(false)
+
+  // ── Forgot Password state ─────────────────────────────────────────────────
+  const [forgotMode, setForgotMode]       = useState(false)
+  const [resetEmail, setResetEmail]       = useState('')
+  const [resetLoading, setResetLoading]   = useState(false)
+  const [resetError, setResetError]       = useState('')
+  const [resetSuccess, setResetSuccess]   = useState(false)
 
   const recaptchaContainerRef = useRef(null)
   const recaptchaVerifierRef  = useRef(null)
@@ -166,6 +176,37 @@ export default function LoginPage() {
     setOtp('')
   }
 
+  // ── Forgot Password ────────────────────────────────────────────────────────
+  const openForgot = () => {
+    setForgotMode(true)
+    setResetEmail(email)   // pre-fill if user already typed email
+    setResetError('')
+    setResetSuccess(false)
+    setError('')
+  }
+
+  const closeForgot = () => {
+    setForgotMode(false)
+    setResetEmail('')
+    setResetError('')
+    setResetSuccess(false)
+  }
+
+  const handleForgotReset = async (e) => {
+    e.preventDefault()
+    setResetError('')
+    setResetSuccess(false)
+    setResetLoading(true)
+    try {
+      await sendPasswordResetEmail(firebaseAuth, resetEmail)
+      setResetSuccess(true)
+    } catch (err) {
+      setResetError(firebaseMsg(err.code) || 'Could not send reset email. Please try again.')
+    } finally {
+      setResetLoading(false)
+    }
+  }
+
   // ── render ─────────────────────────────────────────────────────────────────
   return (
     <div className={styles.page}>
@@ -213,8 +254,64 @@ export default function LoginPage() {
           </button>
         </div>
 
+        {/* ── Forgot Password form ── */}
+        {tab === 'email' && forgotMode && (
+          <div className={styles.form}>
+            <p className={fbStyles.forgotTitle}>Reset your password</p>
+            <p className={fbStyles.forgotHint}>
+              Enter your account email and we'll send you a reset link.
+            </p>
+
+            {resetSuccess ? (
+              <div className={styles.successMsg} role="status">
+                ✓ Check your inbox — a password reset link has been sent to <strong>{resetEmail}</strong>.
+              </div>
+            ) : (
+              <>
+                {resetError && (
+                  <div className={styles.error} role="alert">{resetError}</div>
+                )}
+                <form onSubmit={handleForgotReset}>
+                  <div className={styles.field}>
+                    <div className={styles.inputWrap}>
+                      <span className={styles.inputIcon}><Mail size={16} /></span>
+                      <input
+                        type="email"
+                        id="reset-email"
+                        placeholder=" "
+                        value={resetEmail}
+                        onChange={e => setResetEmail(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                      <label htmlFor="reset-email">Email address</label>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={resetLoading}
+                    style={{ marginTop: '1rem' }}
+                  >
+                    {resetLoading ? 'Sending…' : 'Send Reset Email'}
+                  </button>
+                </form>
+              </>
+            )}
+
+            <button
+              type="button"
+              className={fbStyles.resendBtn}
+              onClick={closeForgot}
+              style={{ marginTop: '0.75rem' }}
+            >
+              ← Back to Sign In
+            </button>
+          </div>
+        )}
+
         {/* ── Email / Password form ── */}
-        {tab === 'email' && (
+        {tab === 'email' && !forgotMode && (
           <form onSubmit={handleEmail} className={styles.form}>
             <div className={styles.field}>
               <div className={styles.inputWrap}>
@@ -245,6 +342,16 @@ export default function LoginPage() {
                 />
                 <label htmlFor="fb-password">Password</label>
               </div>
+            </div>
+
+            <div className={fbStyles.forgotRow}>
+              <button
+                type="button"
+                className={fbStyles.forgotLink}
+                onClick={openForgot}
+              >
+                Forgot Password?
+              </button>
             </div>
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
