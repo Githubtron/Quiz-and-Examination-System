@@ -122,23 +122,12 @@ public class ExamTemplateService {
             throw new IllegalStateException("Exam has no questions assigned. Please add questions to this exam before students can attempt it.");
         }
 
-        Set<String> usedSignatures = studentExamPaperRepository.findByExamId(examId).stream()
-            .map(StudentExamPaper::getQuestionIds)
-            .map(this::signatureFromCsv)
-            .collect(Collectors.toSet());
-
-        List<Long> generatedQuestionIds = null;
-        for (int attempt = 0; attempt < 100; attempt++) {
-            List<Long> candidate = generateQuestionIds(examId, studentId, attempt);
-            if (candidate.isEmpty()) continue;
-            if (!usedSignatures.contains(signatureForIds(candidate))) {
-                generatedQuestionIds = candidate;
-                break;
-            }
-        }
+        // The seed already incorporates studentId, so each student gets a naturally different
+        // shuffled ordering without needing cross-student uniqueness checks.
+        List<Long> generatedQuestionIds = generateQuestionIds(examId, studentId, 0);
 
         if (generatedQuestionIds == null || generatedQuestionIds.isEmpty()) {
-            throw new IllegalStateException("Unable to generate a unique question paper with the current template/question pool");
+            throw new IllegalStateException("Unable to generate a question paper — the exam has no questions assigned.");
         }
 
         StudentExamPaper paper = new StudentExamPaper();
@@ -159,10 +148,6 @@ public class ExamTemplateService {
         }
     }
     
-    private void cleanupDuplicateStudentPapers(long examId, long studentId) {
-        // This method is no longer used - cleanup is done via native query in getOrCreateStudentPaper
-    }
-
     @Transactional
     public List<Question> getAssignedQuestions(long examId, long studentId) {
         StudentExamPaper paper = getOrCreateStudentPaper(examId, studentId);
@@ -350,17 +335,6 @@ public class ExamTemplateService {
 
     private String toCsv(List<Long> ids) {
         return ids.stream().map(String::valueOf).collect(Collectors.joining(","));
-    }
-
-    private String signatureFromCsv(String csv) {
-        return signatureForIds(parseCsvIds(csv));
-    }
-
-    private String signatureForIds(List<Long> ids) {
-        return ids.stream()
-            .sorted()
-            .map(String::valueOf)
-            .collect(Collectors.joining(","));
     }
 
     private List<Integer> mcqOptionOrder(long examId, long studentId, long questionId, int optionCount) {
