@@ -460,6 +460,14 @@ export default function LoginPage() {
             >
               📋 Demo Professor
             </button>
+            <button
+              type="button"
+              className={`${styles.demoBtn} ${styles.demoBtnAdmin}`}
+              onClick={() => handleDemoLogin('ADMIN')}
+              disabled={loading}
+            >
+              🛡️ Demo Admin
+            </button>
           </div>
         </div>
 

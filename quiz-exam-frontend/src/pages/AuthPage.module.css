@@ -226,7 +226,7 @@
 
 .demoRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.6rem;
 }
 
@@ -263,6 +263,18 @@
 
 .demoBtnProfessor {
   /* professor tint — slightly orange-gold */
+}
+
+.demoBtnAdmin {
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.1);
+  color: #a78bfa;
+}
+
+.demoBtnAdmin:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.15);
 }
 
 .switchLink {

@@ -27,6 +27,7 @@ public class DataInitializer {
         // Demo users for the frontend demoLogin() flow
         seedUser("alex_demo",   "alex.student@demo.quizmaster.app", "demo-student-pwd", Role.STUDENT);
         seedUser("dr_demo",     "dr.smith@demo.quizmaster.app",     "demo-prof-pwd",    Role.PROFESSOR);
+        seedUser("admin_demo",  "admin@demo.quizmaster.app",        "demo-admin-pwd",   Role.ADMIN);
     }
 
     private void seedUser(String username, String email, String password, Role role) {

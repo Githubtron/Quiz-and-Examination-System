@@ -169,10 +169,11 @@ public class AuthController {
         String username = switch (req.role().toUpperCase()) {
             case "STUDENT"   -> "alex_demo";
             case "PROFESSOR" -> "dr_demo";
+            case "ADMIN"     -> "admin_demo";
             default -> null;
         };
         if (username == null) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid demo role. Use STUDENT or PROFESSOR"));
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid demo role. Use STUDENT, PROFESSOR, or ADMIN"));
         }
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) {
